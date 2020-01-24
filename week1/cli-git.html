@@ -105,8 +105,8 @@ class: middle
 ### About git
 Git is a `version control system`— but don't worry about what that might mean for now!
 
-All you need to know is that git helps you keep track of the changes you make to code, and allows you to
- collaborate with others in a structured way.
+All you need to know is that git helps you keep track of the changes you make to code,
+see the history of changes you've made, and collaborate with others in a structured way.
 
 ---
 class: middle
@@ -152,7 +152,7 @@ Open code editor, crate a new file, and then run git status
 class: middle
 
 ## The `add` command
-The `add` command tells get to add the files that you specify to your git project.
+The `add` command tells git to add the files that you specify to your git project.
 
 Git will then know to look for those files in the future, and see if there are any changes to them.
 ```shell
@@ -165,7 +165,7 @@ discuss how added files are only staged
 class: middle
 
 ## The `commit` command
-The `commit` command saves the files that you've added — or the changes to files that you've already added — to the repositories history.
+The `commit` command saves the files that you've added — or the changes to files that you've added previously — to the repository.
 
 ```shell
 $ git commit -m"Add index.html"
@@ -191,7 +191,7 @@ The diff command shows you what changes you've made if any to the files that are
 ```shell
 $ git diff
 ```
-If you've made a lot of changes, it can be helpful to look at them one at a time by using status and diff together:
+If you've made a lot of changes, it can be helpful to look at them one at a time by using `status` and `diff` together:
 ```shell
 $ git status
 ```
