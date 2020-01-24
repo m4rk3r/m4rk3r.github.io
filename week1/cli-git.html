@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Recap</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle center
+
+ # ~ how to use Terminal App <BR>(aka the command line) ~
+
+---
+class: center middle
+
+## The 4 most commonly used commands:
+
+---
+class: middle
+
+## `cd` = `c`hange `d`irectory
+The `cd` command is what you use to move around your computer on the command line:
+```shell
+$ cd /Users/mark/Documents/
+```
+or more concisely
+```shell
+$ cd ~/Documents/
+```
+*the tilde (~) is a shortcut for the home directory e.g. `/Users/<user>`*
+
+---
+class: middle
+
+## `ls` = `l`ist files
+The `ls` command shows you all the files that are in the current directory you are in.
+```shell
+$ ls
+assets          hii.jpg          index.html          test.html
+```
+
+---
+class: middle
+
+## `mkdir` = `m`ake `dir`ectory
+The `mkdir` command creates a new folder
+```shell
+$ mkdir test
+$ ls
+assets          hii.jpg          index.html          test.html          test
+```
+
+---
+class: middle
+
+## `rm` = `r`emove
+The `rm` command removes or deletes files.
+```shell
+$ rm test.html
+$ ls
+assets          hii.jpg          index.html          test
+```
+**note:** unlike moving things to the trash, when you `rm` something it is **immediately deleted permantely!**
+---
+class: middle
+
+## There are a lot more commands you can use, but these 4 should get us started : )
+
+---
+class: center middle
+
+## ~ how to use git ~
+
+---
+class: middle
+
+### About git
+Git is a `version control system`— but don't worry about what that might mean for now!
+
+All you need to know is that git helps you keep track of the changes you make to code, and allows you to
+ collaborate with others in a structured way.
+
+---
+class: middle
+
+### [github.com](https://github.com)
+Github is a place where you can host your projects. Git and github use the term `repositories` to refer to the folder that contains your code.
+
+It has social aspects, and is where the vast majority of `open source` code is stored.
+
+???
+explain open source<BR>
+Go to github and create accoutns~
+---
+class: middle
+
+### The `clone` command
+The first command we can use with our newly created repostiroy on github.com..
+
+```shell
+$ git clone <repository url>
+```
+
+The clone command is an initial command you use when getting a new repository, like the one we just created.
+
+---
+class: middle
+
+## The `status` command
+The `status` command is kind of similar to the `ls` command, except it only shows you files that git hasn't seen before or that have
+changed since git last saw them:
+```shell
+$ git status
+```
+
+???
+Open code editor, crate a new file, and then run git status
+
+---
+class: middle
+
+## The `add` command
+The `add` command tells get to add the files that you specify to your git project.
+
+Git will then know to look for those files in the future, and see if there are any changes to them.
+```shell
+$ git add index.html
+```
+
+???
+discuss how added files are only staged
+---
+class: middle
+
+## The `commit` command
+The `commit` command saves the files that you've added — or the changes to files that you've already added — to the repositories history.
+
+```shell
+$ git commit -m"Add index.html"
+```
+**note:** the `-m"<message>"` command is important to include, this is the `commit` message, that will help you understand in the future what
+  the files or changes you're saving are. It's important to always specifiy a messge, even if it's simple: `-m"Fixed a bug"`
+
+---
+class: middle
+
+## The `push` command
+This command sends the work we've done locally to the hosted repository on github.com. This is an important step to both back up
+your work, and allow for others to use your code.
+```shell
+$ git push
+```
+
+---
+class: middle
+
+## The `diff` command
+The diff command shows you what changes you've made if any to the files that are tracked by git.
+```shell
+$ git diff
+```
+If you've made a lot of changes, it can be helpful to look at them one at a time by using status and diff together:
+```shell
+$ git status
+```
+to see what files have changed, and then:
+```shell
+$ git diff index.html
+```
+
+---
+class: middle
+
+## The `log` command
+The `log` command shows the the history — or all the times you've used `commit` — within your project.
+```shell
+$ git log
+```
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+    </script>
+  </body>
+</html>
