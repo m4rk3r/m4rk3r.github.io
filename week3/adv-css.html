@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Advanced CSS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+      #box1 {
+        margin: 15px;
+        border: dashed 1px green;
+      }
+      #box2 {
+        padding: 15px;
+        border: solid 1px orange;
+      }
+      .box {
+        color: blue;
+      }
+
+      #box4 {
+        border: solid 1px #ccc;
+        width: 300px;
+        padding: 15px 0;
+      }
+
+      #box4 h2 {
+        border-bottom: solid 2px green;
+        width: 25%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .example-link:link {
+        color: black;
+      }
+      .example-link:visited {
+        color: black;
+      }
+      .example-link:hover {
+        color: blue;
+      }
+      .example-link:active {
+        color: blue;
+      }
+      #notice {
+        display: inline-block;
+        position: relative;
+        padding: 50px;
+        background: rgb(245, 187, 127);
+      }
+      .x-icon {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        line-height: 1;
+      }
+      #box5 {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        transition: background-color 1s ease-in-out;
+      }
+      #box5:hover {
+        background-color: orange;
+      }
+      #alignment-example h1 {
+        text-align: center;
+      }
+      #alignment-example p {
+        text-align: justify;
+      }
+      .exp-message {
+        font-size: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle center
+
+# ~ Advanced css ~
+
+---
+class: middle
+
+## Responsive css
+Making a `responsive` website is about ensuring the css *responds* to different device conditions like mobile phones,
+wide screen monitors and everything in between.
+
+---
+class: middle
+
+## Setting the meta viewport
+The very first step to creating a `responsive` site is to tell the browser that the site is designed to handle various browser dimensions:
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1">
+```
+Like the meta tag setting `charset="utf-8"` this tells the browser to set the width that css uses as the device width:
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+```
+
+---
+class: middle
+
+## Changing the layout based on browser dimensions
+Now that we've told the browser we're accounting for dimensions, it's time to actually
+change things when the browser size changes with **media queries**.
+
+```css
+body {
+  font-size: 16px;
+}
+
+/* any browser window 320px and smaller will get these styles */
+@media (max-width: 320px) {
+  body {
+    font-size: 12px;
+  }
+}
+```
+The `@media` can be placed after any rule that you'd like to change based on some condition
+
+---
+class: middle
+
+There are extensive list of conditions you can target, another common one being print:
+```css
+#menu {
+  /* menu css here... */
+}
+
+/* hide the menu when printing this page */
+@media print {
+  #menu {
+    display: none;
+  }
+}
+
+```
+
+---
+class: middle
+
+## Powers of Ten
+
+<video src="assets/pow10.mkv" controls></video>
+
+[demo](https://m4rk3r.github.io/week3/pow10.html) / [css source](https://github.com/m4rk3r/m4rk3r.github.io/blob/master/week3/pow10.css)
+
+
+---
+class: middle
+
+## Using responsive units
+Last week we recapped using `%` percentage and `px` pixel units in css.
+
+Along with `%`, there are two other important responsive units: `em` and `rem`.
+
+---
+class: middle
+
+## `em` units
+The `em` unit refers to the *computed* font-size of that elements nearest parent's font size.
+In most browsers, the default font size for the html root is 16px, therefore:
++ `1em` is equal to `16px`
++ `2em` is equal to `32px`
+
+Therefore `em` units are an effective way to create a relative and responsive layout...
+
+---
+class: middle
+But...
+
+Since `em` units are relative to their parent, they can have a cascading effect if they are nested:
+```html
+<style>
+  html {
+    font-size: 16px;
+  }
+
+  .message {
+    font-size: 1.5em;
+  }
+</style>
+  <!-- 1em aka 16px -->
+  <div class="message">
+    Big
+    <!-- oop, parent element is 16 x 1.5 aka 24px -->
+    <div class="message">
+        Bigger
+        <!-- oop, parent element is 24 x 1.5 aka 36px -->
+        <div class="message">
+          Biggest!
+          <!-- oop, parent element is 36 x 1.5 aka 54px -->
+          <div class="message">
+            ahhhhh
+          </div>
+        </div>
+    </div>
+  </div>
+```
+
+</style>
+  <div class="exp-message">
+    Big
+    <div class="exp-message">
+        Bigger
+        <div class="exp-message">
+          Biggest!
+          <div class="exp-message">
+            ahhhhh
+          </div>
+        </div>
+    </div>
+  </div>
+
+---
+class: middle
+
+This is what went wrong with what has become one of my [favorite websites.](https://webrecorder.io/m4rk3r/cool-old-web/20150313041327/http://www.sewingandembroiderywarehouse.com/embtrb.htm)
+
+---
+class: middle
+
+To solve the possibility of runaway text sizing, a second safer responsive unit exists: the `rem`
+
+It's just like the `em` unit, but the `r` stands for root. `rem` units only look at the root aka `html`
+font-size to determine their size, eliminating any potential for nested chaos.
+
+---
+class: middle
+
+## How to use responsive units
+The true power of responsive units becomes clear when we start making responsive
+sites that have different appearances for different browser sizes.
+
+---
+class: middle
+
+With fixed `px` units:
+```html
+<style media="screen">
+  section article h1 {
+    font-size: 36px;
+  }
+  section article img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+  section article p {
+    font-size: 18px;
+  }
+  section article blockquote {
+    font-size: 20px;
+  }
+  @media (max-width: 320px) {
+    section article h1 {
+      font-size: 24px;
+    }
+    section article img {
+      height: 100px;
+    }
+    section article p {
+      font-size: 12px;
+    }
+    section article blockquote {
+      font-size: 16px;
+    }
+  }
+</style>
+<section>
+    <article>
+      <h1>My Blog Post</h1>
+      <img src="blog-header.jpg">
+      <p>Hi welcome to my first post...</p>
+      <blockquote>I've always wanted to blog!</blockquote>
+      <p>Finally I'm posting my blog..</p>
+    </article>
+</section>
+```
+
+---
+class: middle
+
+Simplified with responsive units:
+```html
+<style media="screen">
+  html {
+    /* this is the equivelent of setting it to 10px */
+    font-size: 62.5%;
+  }
+  section article h1 {
+    /* 3.6em x the root element (10px) = 36px */
+    font-size: 3.6rem;
+  }
+  section article img {
+    width: 100%;
+    height: 20rem;
+    object-fit: contain;
+  }
+  section article p {
+    font-size: 1.8rem;
+  }
+  section article blockquote {
+    font-size: 2rem;
+  }
+  @media (max-width: 320px) {
+    html {
+      font-size: 50%;
+    }
+  }
+</style>
+<section>
+    <article>
+      <h1>My Blog Post</h1>
+      <img src="blog-header.jpg">
+      <p>Hi welcome to my first post...</p>
+      <blockquote>I've always wanted to blog!</blockquote>
+      <p>Finally I'm posting my blog..</p>
+    </article>
+</section>
+```
+
+---
+class: middle
+
+## Animating interactive elements
+Using the example from last week, we can demonstrate the `transition` property.
+
+```html
+<style type="text/css">
+  /* set the initial box color to green */
+  #box5 {
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    transition: background-color 1s ease-in-out;
+  }
+  /* and then use the :hover keyword to change it to orange */
+  #box5:hover {
+    background-color: orange;
+  }
+</style>
+
+<div id="box5"></div>
+```
+<div id="box5"></div>
+
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname) {
+             links[i].target = '_blank';
+         }
+      }
+
+      document.querySelector('video').addEventListener('loadedmetadata', function() {
+        this.currentTime = 12;
+      }, false);
+    </script>
+  </body>
+</html>
