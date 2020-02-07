@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stars</title>
+    <style type="text/css">
+      body {
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #circle {
+        overflow: hidden;
+        border: solid 1px white;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+      }
+
+      #circle:hover {
+        position: relative;
+        cursor: zoom-in;
+      }
+
+      .star {
+        position: absolute;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="circle">
+      <span class="star" style="left: 80%; top: 10%;">*</span>
+      <span class="star" style="left: 5%; top: 5%;">*</span>
+      <span class="star" style="left: 33%; top: 20%;">*</span>
+      <span class="star" style="left: 65%; top: 18%;">*</span>
+      <span class="star" style="left: 42%; top: 50%;">*</span>
+      <span class="star" style="left: 62%; top: 30%;">*</span>
+      <span class="star" style="left: 44%; top: 60%;">*</span>
+    </div>
+  </body>
+</html>
