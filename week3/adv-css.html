@@ -8,6 +8,10 @@
       @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
+      html {
+        font-size: 24px;
+      }
+
       body { font-family: 'Open Sans';}
       h1, h2, h3 {
         font-family: 'Nanum Gothic';
@@ -42,59 +46,17 @@
         color: rgb(108, 108, 108);
       }
 
+      .two-column ul {
+        columns: 2;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
       a { text-decoration: none; }
       a:visited { color: blue;}
 
       /* for slide examples */
-      #box1 {
-        margin: 15px;
-        border: dashed 1px green;
-      }
-      #box2 {
-        padding: 15px;
-        border: solid 1px orange;
-      }
-      .box {
-        color: blue;
-      }
-
-      #box4 {
-        border: solid 1px #ccc;
-        width: 300px;
-        padding: 15px 0;
-      }
-
-      #box4 h2 {
-        border-bottom: solid 2px green;
-        width: 25%;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .example-link:link {
-        color: black;
-      }
-      .example-link:visited {
-        color: black;
-      }
-      .example-link:hover {
-        color: blue;
-      }
-      .example-link:active {
-        color: blue;
-      }
-      #notice {
-        display: inline-block;
-        position: relative;
-        padding: 50px;
-        background: rgb(245, 187, 127);
-      }
-      .x-icon {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        line-height: 1;
-      }
       #box5 {
         width: 50px;
         height: 50px;
@@ -104,15 +66,112 @@
       #box5:hover {
         background-color: orange;
       }
-      #alignment-example h1 {
-        text-align: center;
-      }
-      #alignment-example p {
-        text-align: justify;
-      }
       .exp-message {
-        font-size: 1.5em;
+        font-size: 2em;
       }
+      img[alt="chart"], img[alt="grid"] {
+        width: 100%;
+      }
+      #nav-example {
+        display: flex;
+        border: solid .1rem green;
+      }
+      #nav-example a {
+        padding: .5rem;
+      }
+      .space-around {
+        justify-content: space-around;
+      }
+      .space-between {
+        justify-content: space-around;
+      }
+      .login {
+        margin-left: auto;
+      }
+      .column {
+        flex-direction: column;
+      }
+      .align-center {
+        align-items: center;
+      }
+      #site {
+        display: grid;
+        /* 6 column grid with 1 fraction aka equal columns */
+        /* this could condensed by using: repeat(6, 1fr) */
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr auto 1fr;
+        font-size: 12px;
+      }
+      #site header {
+        background: rgba(100, 207, 69, 0.4);
+        grid-column: span 6;
+      }
+      #site aside {
+        background: rgba(99, 139, 98, 0.4);
+        grid-column: span 1;
+      }
+      #site aside nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #site main {
+        grid-column: span 5;
+        padding: 30px;
+      }
+      #site footer {
+        background: rgba(143, 176, 219, 0.5);
+        grid-column: span 6
+      }
+      #my-grid {
+        display: grid;
+        grid-template-rows: 5rem 5rem;
+        grid-template-columns: 5rem 5rem 5rem;
+        border: solid 1px black;
+        width: max-content;
+      }
+
+      #my-grid-2, #my-grid-span {
+        display: grid;
+        grid-template-rows: 5rem 5rem;
+        grid-template-columns: 5rem 5rem 5rem;
+        border: solid 1px black;
+        width: max-content;
+      }
+      #box-span-1 {
+        grid-column: 1 / span 2;
+        grid-row: 1;
+        background: green;
+      }
+      #box-1 {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        background: green;
+      }
+      #box-span-2, #box-2 {
+        grid-column: 3;
+        grid-row: 2;
+        background: orange;
+      }
+      #my-grid-3 {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 20rem;
+        height: 10rem;
+        border: solid 1px black;
+      }
+      #box-3-1 {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        background: green;
+      }
+      #box-3-2 {
+        grid-column: 3;
+        grid-row: 2;
+        background: orange;
+      }
+
     </style>
   </head>
   <body>
@@ -127,6 +186,8 @@ class: middle
 ## Responsive css
 Making a `responsive` website is about ensuring the css *responds* to different device conditions like mobile phones,
 wide screen monitors and everything in between.
+
+![chart](assets/stats.png)
 
 ---
 class: middle
@@ -187,11 +248,21 @@ There are extensive list of conditions you can target, another common one being 
 ---
 class: middle
 
-## Powers of Ten
+## Powers of Ten example
 
 <video src="assets/pow10.mkv" controls></video>
 
 [demo](https://m4rk3r.github.io/week3/pow10.html) / [css source](https://github.com/m4rk3r/m4rk3r.github.io/blob/master/week3/pow10.css)
+
+---
+class: middle li-spacing
+
+## Responsive units?
+Two main issues with using `px` for sizing fonts and elements are that:
++ actual `px` units are approximate, `1px` does not equal one screen pixel, there are all sorts of things that effect this: screen densities (retina screens),
+scaling, screen types...
++ `px` are absolute, they override any user font size settings (accessibility), they're inflexible to screen
+size differences, etc..
 
 
 ---
@@ -207,11 +278,47 @@ class: middle
 
 ## `em` units
 The `em` unit refers to the *computed* font-size of that elements nearest parent's font size.
-In most browsers, the default font size for the html root is 16px, therefore:
+In most browsers, the default font size for the html root is 16px, so:
 + `1em` is equal to `16px`
 + `2em` is equal to `32px`
 
 Therefore `em` units are an effective way to create a relative and responsive layout...
+
+---
+class: middle
+
+One trick to simplify working with `em` units is to convert the container element to have a font size that's
+easier to convert to whatever size you're trying to approximate...
+
+
+---
+class: middle
+
+By default `1em` is equal to `16px`, if you wanted to make a font appear as `20px` you would want to set
+it to `1.25em` (16 * 1.25 = 20).
+
+But who wants to be doing math in css...
+
+If we set our root element to be `10px`, then all we would need to do is move the decimal place one to the left
+so `2.0rem` or just `2rem` (`1rem` is euqal to `10px` so `2rem` = `20px`)
+
+---
+class: middle
+
+But setting our root element to `10px` would defeat the whole purpose of not using absolute units.. so the trick is
+to use a `%` percentage unit to achieve the `10px`... so `62.5%` of `16px` is `10px`:
+```css
+html {
+  /* we can have our 10px base and be responsive to user settings~ */
+  font-size: 62.5%;
+}
+```
+</section>
+
+---
+class: middle center
+
+![maths](assets/maths.jpg)
 
 ---
 class: middle
@@ -221,23 +328,23 @@ Since `em` units are relative to their parent, they can have a cascading effect 
 ```html
 <style>
   html {
-    font-size: 16px;
+    font-size: 62.5%; /* aka 10px */
   }
 
   .message {
-    font-size: 1.5em;
+    font-size: 2em;
   }
 </style>
-  <!-- 1em aka 16px -->
+  <!-- 2em aka 20px; -->
   <div class="message">
     Big
-    <!-- oop, parent element is 16 x 1.5 aka 24px -->
+    <!-- oop, parent element is 20 x 1.5 aka 30px -->
     <div class="message">
         Bigger
-        <!-- oop, parent element is 24 x 1.5 aka 36px -->
+        <!-- oop, parent element is 30 x 1.5 aka 45px -->
         <div class="message">
           Biggest!
-          <!-- oop, parent element is 36 x 1.5 aka 54px -->
+          <!-- oop, parent element is 45 x 1.5 aka 67.5px -->
           <div class="message">
             ahhhhh
           </div>
@@ -333,7 +440,7 @@ Simplified with responsive units:
 ```html
 <style media="screen">
   html {
-    /* this is the equivelent of setting it to 10px */
+    /* this is the equivelent of setting 10px (16 * .625 = 10) */
     font-size: 62.5%;
   }
   section article h1 {
@@ -371,7 +478,442 @@ Simplified with responsive units:
 ---
 class: middle
 
-## Animating interactive elements
+## Example
+[px vs em units](https://m4rk3r.github.io/week3/units-example.html) / [source](https://github.com/m4rk3r/m4rk3r.github.io/blob/master/week3/units-example.html)
+
+---
+class: center middle
+
+## Responsive formatting: `flexbox` & `grid`
+
+---
+class: middle
+
+## CSS Flexbox
+As the name implies, `flexbox` is a versatile way to arrange boxes.
+
+Flexbox is most useful when you find yourself needing to align elements:
+- centering something within a container
+- aligning things in a single single dimension (row or column, like a nav or sidebar)
+- rearranging the order of items in a row/column
+
+---
+class: middle
+
+Flexbox is a `display` property, so to utilize it we first set an element to `display: flex;`:
+
+By default `flexbox` works in the x-axis and bunches everything at the "front" of the element or in
+flexbox terms `flex-start`:
+
+```html
+<style type="text/css">
+  nav {
+    display: flex;
+    border: solid .1rem green;
+  }
+  nav a {
+    padding: .5rem;
+  }
+</style>
+<nav>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">Login</a>
+</nav>
+```
+<nav id='nav-example'>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">login</a>
+</nav>
+
+---
+class: middle two-column
+
+Alignment can be adjusted for both axises. Adjusting the primary axis (x-axis in this case) we use `justify-content` which has the following options:
+ + flex-start
+ + center
+ + space-around
+ + space-between
+ + flex-end
+
+```html
+<style type="text/css">
+  nav {
+      display: flex;
+      border: solid .1rem green;
+      justify-content: space-between;
+  }
+  nav a {
+      padding: .5rem;
+  }
+</style>
+<nav>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">Login</a>
+</nav>
+```
+<nav id='nav-example' class="space-around">
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">login</a>
+</nav>
+
+---
+class: middle
+
+The size of children will be dynamically calculated, making it easy to use things like `auto` to preform custom spacing:
+```html
+<style type="text/css">
+  nav {
+      display: flex;
+      border: solid .1rem green;
+  }
+  nav a {
+      padding: .5rem;
+  }
+  nav .login {
+    margin-left: auto;
+  }
+</style>
+<nav>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#" class="login">Login</a>
+</nav>
+```
+<nav id='nav-example'>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#" class="login">login</a>
+</nav>
+
+---
+class: middle
+
+We can also change things to the vertical axis to make a mobile menu with the `flex-direction` property:
+```html
+<style type="text/css">
+  nav {
+      display: flex;
+      /* recall that the default is `row` */
+      flex-direction: column;
+      border: solid .1rem green;
+  }
+  nav a {
+      padding: .5rem;
+  }
+</style>
+<nav>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">Login</a>
+</nav>
+```
+<nav id='nav-example' class="column">
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">login</a>
+</nav>
+
+---
+class: middle
+
+Let's also center those menu items into the middle of the nav, with the `align-items` property.
+
+Align items is just like `justify-content` but operates on the opposite axis, so in this case our `flex-direction` is column (y-axis)
+so it'll align things on the x-axis:
+```html
+<style type="text/css">
+  nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: solid .1rem green;
+  }
+  nav a {
+      padding: .5rem;
+  }
+</style>
+<nav>
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">Login</a>
+</nav>
+```
+<nav id='nav-example' class="column align-center">
+  <a href="#">about</a>
+  <a href="#">blog</a>
+  <a href="#">support us</a>
+  <a href="#">login</a>
+</nav>
+
+
+---
+class: middle center
+
+[There's a lot more `flexbox` can do~](https://developer.mozilla.org/en-US/docs/Glossary/Flexbox)
+
+---
+class: middle
+
+## CSS Grid
+Another handy `display` property for formatting interfaces is css `grid`.
+
+---
+class: middle
+
+Unlike `flexbox`, `grid` is best for more complex layouts that span two dimensions:
+
+![grid](assets/grid.png)
+
+---
+class: middle
+
+Like `flexbox`, `grid` is a `display` property so we use it by setting:
+```style
+#site {
+  display: grid;
+}
+```
+Since grids work in two dimensions, we can define our grid by specifying how many rows and columns we want with
+`grid-template-rows` and `grid-template-columns`:
+```html
+<style type='text/css'>
+  #my-grid {
+    display: grid;
+    grid-template-rows: 5rem 5rem;
+    grid-template-columns: 5rem 5rem 5rem;
+    border: solid 1px black;
+    width: max-content;
+  }
+</style>
+<div id="my-grid"></div>
+```
+<div id="my-grid"></div>
+
+---
+class: middle
+
+Now that we've defined a 3x2 grid, we can place elements within it with `grid-row` and `grid-column`:
+```html
+<style type='text/css'>
+  #my-grid {
+    display: grid;
+    grid-template-rows: 5rem 5rem;
+    grid-template-columns: 5rem 5rem 5rem;
+    border: solid 1px black;
+    width: max-content;
+  }
+  #box-1 {
+    /* start at 1st column and end at 3rd */
+    grid-column: 1 / 3;
+    grid-row: 1;
+    background: green;
+  }
+  #box-2 {
+    grid-column: 3;
+    grid-row: 2;
+    background: orange;
+  }
+</style>
+<div id="my-grid">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+```
+<div id="my-grid-2">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+
+---
+class: middle
+
+The `grid-column` and `grid-row` properties can specify two items:
+```css
+grid-column: <start column> / <end column>;
+```
+Another more intuitive way to set how many columns or rows an item extends through can be set with the `span` keyword:
+```css
+grid-column: <start column> / span <number of columns>;
+```
+
+[mdn reference](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column)
+
+---
+class: middle
+
+Same example using `span` keyword:
+```html
+<style type='text/css'>
+  #my-grid {
+    display: grid;
+    grid-template-rows: 5rem 5rem;
+    grid-template-columns: 5rem 5rem 5rem;
+    border: solid 1px black;
+    width: max-content;
+  }
+  #box-1 {
+    /* start at 1st column and end at 3rd */
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    background: green;
+  }
+  #box-2 {
+    grid-column: 3;
+    grid-row: 2;
+    background: orange;
+  }
+</style>
+<div id="my-grid">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+```
+<div id="my-grid-span">
+  <div id="box-span-1"></div>
+  <div id="box-span-2"></div>
+</div>
+
+
+---
+class: middle
+
+## Grid cell units
+While you can use `rem`, `px` and things like `auto` to size your grids, it can be more flexible to think
+about them as fractions of the total grid instead of fixed values.
+
+The `fr` or fraction unit is useful for this purpose. They'll divvy up the space in the grid instead of
+having the cells determine the grid width and height.
+
+---
+class: middle
+
+Replacing our previous example:
+
+```html
+<style type='text/css'>
+  #my-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: solid 1px black;
+    width: 20rem;
+    height: 10rem;
+  }
+  #box-1 {
+    /* start at 1st column and end at 3rd */
+    grid-column: 1 / 3;
+    grid-row: 1;
+    background: green;
+  }
+  #box-2 {
+    grid-column: 3;
+    grid-row: 2;
+    background: orange;
+  }
+</style>
+<div id="my-grid">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+```
+<div id="my-grid-3">
+  <div id="box-3-1"></div>
+  <div id="box-3-2"></div>
+</div>
+
+---
+class: middle center
+
+## Putting it all together ~
+
+---
+class: middle
+
+```html
+<style type="text/css">
+  #site {
+    display: grid;
+    /* 6 column grid with 1 fraction aka equal columns */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    font-size: 12px;
+  }
+  #site header {
+    background: rgba(100, 207, 69, 0.4);
+    grid-column: span 6;
+  }
+  #site aside {
+    background: rgba(99, 139, 98, 0.4);
+    grid-column: span 1;
+  }
+  #site aside nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #side main {
+    grid-column: span 5;
+  }
+  #site footer {
+    grid-column: span 6
+  }
+</style>
+<div id="site">
+  <header>My blog~</header>
+  <aside>
+    <nav>
+      <a href='/about'>about</a>
+      <a href="/blog">blog</a>
+    </nav>
+  </aside>
+  <main>
+    <section>
+      <article>
+        <h1>my first post</h1>
+        <p>...</p>
+      </article>
+    </section>
+  </main>
+  <footer><a href="#">Sign up for the mailing list</a></footer>
+</div>
+```
+
+<div id="site">
+  <header>My blog~</header>
+  <aside>
+    <nav>
+      <a href='/about'>about</a>
+      <a href="/blog">blog</a>
+    </nav>
+  </aside>
+  <main>
+    <section>
+      <article>
+        <h1>my first post</h1>
+        <p>...</p>
+      </article>
+    </section>
+  </main>
+  <footer><a href="#">Sign up for the mailing list</a></footer>
+</div>
+
+---
+class: middle
+
+## Revisiting interactive elements
 Using the example from last week, we can demonstrate the `transition` property.
 
 ```html
