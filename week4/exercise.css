@@ -25,6 +25,10 @@ body {
   font-size: 1.8rem;
 }
 
+mark {
+  background-color: rgb(132, 213, 140);
+}
+
 nav {
   position: fixed;
   top: 1.5rem;
