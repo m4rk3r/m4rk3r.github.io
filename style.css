@@ -37,3 +37,34 @@ ul li {
   background-color: #FEC066;
   border-radius: 50%;
 }
+h1 {
+  margin-bottom: 0;
+}
+h3 {
+  margin-top: .5rem;
+  font-weight: 100;
+}
+
+@keyframes heart {
+  0% { content: '💙'; opacity: 1; }
+  10% { opacity: 0;  }
+  20% { content: '💚'; opacity: 1;  }
+  30% { opacity: 0;  }
+  40% { content: '💛'; opacity: 1; }
+  50% { opacity: 0;  }
+  60% { content: '💜'; opacity: 1; }
+  70% { opacity: 0;  }
+  80% { content: '❤️'; opacity: 1; }
+  90% { opacity: 0;  }
+  100% { content: '💙'; opacity: 1; }
+}
+
+.vday:before {
+  content: '💙';
+  animation: heart 5s ease-in-out infinite;
+}
+.vday:after {
+  content: '💙';
+  animation: heart 5s ease-in-out infinite;
+  margin-left: .5rem;
+}

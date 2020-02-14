@@ -57,16 +57,108 @@
       a:visited { color: blue;}
 
       /* for slide examples */
-      #box5 {
+      #box1 {
         width: 50px;
         height: 50px;
         background-color: green;
         transition: background-color 1s ease-in-out;
       }
-      #box5:hover {
+      #box1:hover {
         background-color: orange;
       }
+      #box2 {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        transition: background-color 1s ease-in-out,
+                    transform 1s ease-in-out;
+      }
+      #box2:hover {
+        background-color: orange;
+        transform: scale(1.5, 1.5);
+      }
 
+      #exp {
+        padding: .5rem;
+        border: solid .1rem green;
+        color: green;
+        transition: all 500ms ease-in-out;
+      }
+      #exp:hover {
+        color: blue;
+        border-color: blue;
+      }
+      @keyframes slide {
+        from { left: 0%; }
+        to { left: 50%; }
+      }
+      #orb {
+        position: absolute;
+        animation: slide 5s ease-in-out infinite;
+      }
+
+      @keyframes slide2 {
+        0%  { left: 0%; }
+        50% { left: 50%; }
+        100% { left: 0%; }
+      }
+      #orb2 {
+        position: absolute;
+        animation: slide2 5s ease-in-out infinite;
+      }
+      @keyframes slide3 {
+        0%  { transform: translateX(0%); }
+        50% { transform: translateX(50%); }
+        100% { transform: translateX(0%); }
+      }
+      #orb3 {
+        animation: slide3 5s ease-in-out infinite;
+      }
+      @keyframes slide4 {
+        0%  { transform: translateX(0%); }
+        50% { transform: translateX(10rem) rotateZ(180deg); }
+        100% { transform: translateX(0%); }
+      }
+      #orb8 {
+        animation: slide4 5s ease-in-out infinite;
+      }
+      #orb4 {
+        animation: slide4 5s ease-in-out infinite;
+        width: max-content;
+      }
+      @keyframes slide5 {
+        0%  { transform: translateX(0%); }
+        50% { transform: translateX(10rem) rotateZ(180deg) scale(0.3, 0.3); }
+        100% { transform: translateX(0%); }
+      }
+      #orb5 {
+        animation: slide5 5s ease-in-out infinite;
+        width: max-content;
+      }
+      @keyframes slide6 {
+        0%  { transform: translateX(0%); }
+        50% { transform: scale(0.3, 0.3) translateX(10rem) rotateZ(180deg); }
+        100% { transform: translateX(0%); }
+      }
+      #orb6 {
+        animation: slide6 5s ease-in-out infinite;
+        width: max-content;
+      }
+      @keyframes slide7 {
+        0%  { transform: translateX(0%); }
+        50% { transform: translateX(10rem) rotateZ(180deg) scale(0.3, 0.3); }
+        100% { transform: translateX(0%); }
+      }
+      #orb7 {
+        animation: slide7 5s ease-in-out infinite;
+        width: max-content;
+      }
+      .post p:nth-child(2) {
+        color: green;
+      }
+      .post p:last-child {
+        font-style: italic;
+      }
 
     </style>
   </head>
@@ -85,27 +177,276 @@ Using the example from last week, we can demonstrate the `transition` property.
 ```html
 <style type="text/css">
   /* set the initial box color to green */
-  #box5 {
+  #box1 {
     width: 50px;
     height: 50px;
     background-color: green;
     transition: background-color 1s ease-in-out;
   }
   /* and then use the :hover keyword to change it to orange */
-  #box5:hover {
+  #box1:hover {
     background-color: orange;
   }
 </style>
 
-<div id="box5"></div>
+<div id="box1"></div>
 ```
-<div id="box5"></div>
+<div id="box1"></div>
+
+---
+class: middle center
+
+## [list properties that can be animated with transition](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties)
+
+---
+class: middle
+
+## The `all` catchall
+You can also use `all` to animate any available property that changes:
+```html
+<style type="text/css">
+  a {
+    padding: .5rem;
+    border: solid .1rem #333;
+    color: green;
+    transition: all 500ms ease-in-out;
+  }
+  a:hover {
+    color: blue;
+    border-color: blue;
+  }
+</style>
+
+<a href="#">Test Link</a>
+```
+<a id="exp" href="#">Test Link</a>
 
 ---
 class: middle
 
 ## Creating animations with `@keyframe`
+Along with interactive animations with `transition`, css has another way to create animations with `@keyframes`.
+```html
+<style type="text/css">
+  @keyframes slide {
+    from { left: 0%; }
+    to { left: 50%; }
+  }
 
+  #orb {
+    position: absolute;
+    animation: slide 5s ease-in-out infinite;
+  }
+</style>
+<div id="orb">hiii</div>
+```
+<div id="orb">hiii</div>
+
+---
+class: middle
+
+The states of the animation can be made more granular than `from/to` by using percentages from 0% - 100%
+```html
+<style type="text/css">
+  /* lets make it go smoothly back and forth */
+  @keyframes slide {
+    0%  { left: 0%; }
+    50% { left: 50%; }
+    100% { left: 0%; }
+  }
+
+  #orb {
+    position: absolute;
+    animation: slide 5s ease-in-out infinite;
+  }
+</style>
+<div id="orb">hiii</div>
+<p>hello</p>
+```
+<div id="orb2">hiii</div>
+<p>hello</p>
+
+---
+class: middle
+
+## Changing the position, scale and rotation with `transform`
+
+---
+class: middle
+
+CSS `transform`s are a powerful way to change an element in 2d and 3d space.
+
+We can use `transform` instead of position absolute to move the previous example:
+
+```html
+<style type="text/css">
+  /* lets make it go smoothly back and forth */
+  @keyframes slide {
+    0%  { transform: translateX(0%); }
+    50% { transform: translateX(50%); }
+    100% { transform: translateX(0%); }
+  }
+
+  #orb {
+    animation: slide 5s ease-in-out infinite;
+  }
+</style>
+<div id="orb">hiii</div>
+<p>hello</p>
+```
+<div id="orb3">hiii</div>
+<p>hello</p>
+
+---
+class: middle
+
+We can also add rotations to the previous example:
+
+But note that we're using a block element, which will be with width of the container...
+
+```html
+<style type="text/css">
+  /* lets make it go smoothly back and forth */
+  @keyframes slide {
+    0%  { transform: translateX(0rem); }
+    50% { transform: translateX(10rem) rotateZ(180deg); }
+    100% { transform: translateX(0rem); }
+  }
+
+  #orb {
+    animation: slide 5s ease-in-out infinite;
+  }
+</style>
+<div id="orb">hiii</div>
+```
+<div id="orb8">hiii</div>
+
+---
+class: middle
+
+Setting the width of our container to be the width of content `width: max-content;`
+
+This results in our element being centered on just the text itself:
+
+```html
+<style type="text/css">
+  /* lets make it go smoothly back and forth */
+  @keyframes slide {
+    0%  { transform: translateX(0rem); }
+    50% { transform: translateX(10rem) rotateZ(180deg); }
+    100% { transform: translateX(0rem); }
+  }
+
+  #orb {
+    animation: slide 5s ease-in-out infinite;
+    /* we need to set the width of our box since it's a block element */
+    /* It will otherwise be with width of the container */
+    width: max-content;
+  }
+</style>
+<div id="orb">hiii</div>
+```
+<div id="orb4">hiii</div>
+
+---
+class: middle
+
+The `scale` property is also an interesting way to manipulate elements
+
+```html
+<style type="text/css">
+  @keyframes slide {
+    0%  { transform: translateX(0rem); }
+    50% { transform: translateX(10rem) rotateZ(180deg) scale(0.3, 0.3); }
+    100% { transform: translateX(0rem); }
+  }
+
+  #orb {
+    animation: slide 5s ease-in-out infinite;
+    width: max-content;
+  }
+</style>
+<div id="orb">hiii</div>
+```
+<div id="orb5">hiii</div>
+
+---
+class: middle
+
+For certain `transform` effects, the order of the properties makes a difference:
+```css
+50% { transform: scale(0.3, 0.3) translateX(10rem) rotateZ(180deg); }
+```
+<div id="orb6">hiii</div>
+
+```css
+50% { transform: translateX(10rem) rotateZ(180deg) scale(0.3, 0.3); }
+```
+<div id="orb7">hiii</div>
+
+---
+class: middle
+
+`Transform` can also be used to create interactive changes, using our first example...
+
+```html
+<style type="text/css">
+  /* set the initial box color to green */
+  #box2 {
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    transition: background-color 1s ease-in-out,
+                transform 1s ease-in-out;
+  }
+  /* and then use the :hover keyword to change it to orange */
+  #box2:hover {
+    background-color: orange;
+    transform: scale(1.5, 1.5);
+  }
+</style>
+
+<div id="box2"></div>
+```
+<div id="box2"></div>
+
+---
+class: middle
+
+## Quick recap on `pseudo-class`
+Recall that `pseudo-classes` are those selectors that we used like `:hover` that modify an element..
+in the case of hover adding styles on mouse interaction.
+
+Another type of `pseudo-class` are selectors, like `:nth-child`, `:last-child`, `:first-child` etc..
+
+---
+class: middle
+
+These `pseudo-class` selectors can be useful for selecting items within a list or group of elements:
+```html
+<style type="text/css">
+  .post p:nth-child(2) {
+    color: green;
+  }
+  .post p:last-child {
+    font-style: italic;
+  }
+</style>
+<section class="post">
+  <p>pg1</p>
+  <p>pg2</p>
+  <p>pg2</p>
+</section>
+```
+<section class="post">
+  <p>pg1</p>
+  <p>pg2</p>
+  <p>pg2</p>
+</section>
+---
+class: middle center
+
+### keyframes demo
 
     </textarea>
     <script src="../remark-latest.min.js"></script>
