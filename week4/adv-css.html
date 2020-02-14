@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Advanced CSS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      html {
+        font-size: 24px;
+      }
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      .two-column ul {
+        columns: 2;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+      #box5 {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        transition: background-color 1s ease-in-out;
+      }
+      #box5:hover {
+        background-color: orange;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle center
+
+# ~ Animating css ~
+
+---
+class: middle
+
+## Revisiting interactive elements
+Using the example from last week, we can demonstrate the `transition` property.
+
+```html
+<style type="text/css">
+  /* set the initial box color to green */
+  #box5 {
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    transition: background-color 1s ease-in-out;
+  }
+  /* and then use the :hover keyword to change it to orange */
+  #box5:hover {
+    background-color: orange;
+  }
+</style>
+
+<div id="box5"></div>
+```
+<div id="box5"></div>
+
+---
+class: middle
+
+## Creating animations with `@keyframe`
+
+
+---
+class: middle
+
+## Instruction Sets
+
+- https://anthology.rhizome.org/form-art
+- Sol Lewitt
+- John Cage
+- 
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname) {
+             links[i].target = '_blank';
+         }
+      }
+
+      document.querySelector('video').addEventListener('loadedmetadata', function() {
+        this.currentTime = 12;
+      }, false);
+    </script>
+  </body>
+</html>
