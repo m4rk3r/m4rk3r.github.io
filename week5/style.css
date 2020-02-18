@@ -1,0 +1,68 @@
+body {
+  margin:0;
+}
+
+#sky {
+  height: 25vh;
+  width: 100%;
+  background: linear-gradient(180deg, rgb(125, 181, 238), rgb(169, 208, 208), rgb(238, 221, 217), rgb(250, 142, 142));
+}
+
+#clouds {
+  height: 75vh;
+  width: 100%;
+  background: linear-gradient(180deg, rgb(110, 179, 213), rgb(156, 196, 219), rgb(17, 97, 191));
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr .8fr 1fr .75fr .88fr .92fr 1fr .85fr .92fr 1fr;
+  grid-template-rows: .25fr .33fr .45fr .48fr .58fr .67fr .75fr .81fr .98fr 1fr;
+}
+
+.cloud {
+  margin: 2px;
+  background-color: #FFF;
+}
+
+#clouds .cloud:nth-child(even) {
+  border-radius: 30px 25px 25px 18px;
+}
+
+#clouds .cloud:nth-child(odd) {
+  border-radius: 35px 33px 22px 21px;
+}
+
+#clouds .cloud:nth-child(11) {
+  margin-left: 15px;
+}
+
+#clouds .cloud:nth-child(31) {
+  margin-left: 5px;
+}
+
+#clouds .cloud:nth-child(41) {
+  margin-left: 6px;
+}
+#clouds .cloud:nth-child(50) {
+  margin-right: 6px;
+}
+
+#clouds .cloud:nth-child(61) {
+  margin-left: 16px;
+}
+#clouds .cloud:nth-child(70) {
+  margin-right: 16px;
+}
+
+#clouds .cloud:nth-child(81) {
+  margin-left: 20px;
+}
+#clouds .cloud:nth-child(80) {
+  margin-right: 10px;
+}
+
+#clouds .cloud:nth-child(91) {
+  margin-left: 8px;
+}
+#clouds .cloud:nth-child(100) {
+  margin-right: 20px;
+}
