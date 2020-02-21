@@ -21,3 +21,36 @@ document.addEventListener('keyup', (evt) => {
     section.querySelector('iframe:last-of-type').style.width = '100%';
   }
 });
+
+
+const visibilityCheck = () => {
+  const sections = document.querySelectorAll('section');
+  for (let sec of sections) {
+    let rect = sec.getBoundingClientRect();
+    if (rect.top < 0 && rect.bottom > 0) {
+      const iframes = sec.querySelectorAll('iframe');
+      for (let iframe of iframes) {
+        if (iframe.src === window.location.href) {
+          iframe.src = iframe.dataset.src;
+        }
+      }
+    } else {
+      const iframes = sec.querySelectorAll('iframe');
+      for (let iframe of iframes) {
+        if (iframe.src !== window.location.href) {
+          iframe.src = "";
+        }
+      }
+    }
+  }
+}
+
+var check = Date.now();
+document.addEventListener('scroll', () => {
+  if (Date.now() - check > 2000) {
+    check = Date.now();
+    window.requestAnimationFrame(visibilityCheck);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', visibilityCheck);

@@ -1,0 +1,88 @@
+/* Creative Computing Style Sheet */
+html{
+	/* 62.5 ~= 10px */
+	font-size: 62.5%;
+	}
+body {
+    font-family: courier-std, monospace;
+	font-style: normal;
+	font-weight: 400;
+	}
+#my-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80rem;
+    height: 80rem;
+    border-style: solid;
+    }
+#box-1 {
+    grid-column: 1;
+    grid-row: 1;
+    background: #99b897;
+    overflow: auto;
+  	}
+#box-2 {
+    grid-column: 2;
+    grid-row: 2;
+    background: pink;
+  	}
+.ball {
+	width: 1.8rem; 
+	height: 1.8rem;
+	margin-left: 47%;
+	margin-top: 47%;
+	background-color: red;
+	border-radius: 50%;
+	animation-name: bug; 
+	animation-duration: 10s;
+	}
+#box-3 {
+    grid-column: 3;
+    grid-row: 3;
+    overflow: auto;
+    background: pink;
+  	}
+.new{
+	width: 26.5rem;
+	height: 40rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
