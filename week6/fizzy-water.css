@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
 
-  background-color: rgb(227, 248, 255);
+  background-color: #e3f8ff;
   border-left: solid 1px #CCC;
   border-right: solid 1px #CCC;
   opacity: .85;
@@ -45,7 +45,7 @@ body {
 }
 
 #glass > .top {
-  background-color: rgb(227, 248, 255);
+  background-color: #f2fcff;
   border: solid 1px #d9d9d9;
   margin-left: -.1rem;
 }
@@ -57,12 +57,12 @@ body {
   position: relative;
   z-index: 10;
 }
-#water .top {
+#water > .top {
   background-color: #a1f0ff;
   border: solid 1px #89ccd9;
   box-sizing: border-box;
 }
-#water .bottom {
+#water > .bottom {
   background-color: #a1f0ff;
   border: solid 1px #89ccd9;
   box-sizing: border-box;
@@ -81,12 +81,16 @@ body {
 
   transition: top .5s ease-in-out, opacity .75s ease-in-out;
   transition-delay: 0s, .5s;
+  border: solid 1px #b4b4b4;
+  border-width: 0 0 1px 1px;
+  opacity: .75;
 }
 
 .pop {
   top: 0% !important;
   opacity: 0;
 }
+
 
 #table {
   width: 125vw;

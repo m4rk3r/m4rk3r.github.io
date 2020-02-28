@@ -88,6 +88,14 @@
         transition: background .5s ease-in-out;
       }
 
+      .yellow {
+        background: yellow;
+      }
+
+      .borges-poem-2 {
+        font-size: .8rem;
+      }
+
     </style>
   </head>
   <body>
@@ -124,6 +132,37 @@ Like with CSS, the `linked` approach is the best way to use javascript.
 ---
 class: middle
 
+Javascript is executed line by line as the html document is `parsed`.
+
+The document parsed these lines one by one:
+```html
+<!-- 1 --><!DOCTYPE html>
+<!-- 2 --><html lang="en" dir="ltr">
+<!-- 3 -->  <head>
+<!-- 4 -->    <meta charset="utf-8">
+<!-- 5 -->    <script src="example.js" type="text/javascript"></script>
+```
+So if we have anything in our script that refers to html elements in the page, those won't exist yet
+and result in errors...
+---
+class: middle
+
+So remember we need to add the `defer` attribute to our linked script tags to tell the browser to apply Javascript
+code after the page has been completely parsed.
+
+```html
+<head>
+  <meta charset="utf-8">
+  <script src="example.js" defer type="text/javascript"></script>
+</head>
+```
+**note** this will only work for externally loaded files. Embded javascript, you'll need to place
+the script tag after the body or use other techniques we'll learn more about later..
+
+
+---
+class: middle
+
 #### Variables
 A variable is a container for a value that we can use throughout our code.
 We define a variable by using the `let` keyword in front of it.
@@ -149,7 +188,7 @@ let my_variable = 'hi';
 class: middle
 
 ### Values vocabulary
-There are several ways things can be represented in code, what we refer to as `types`.
+There are several ways values can be represented in code, what we refer to as `types`.
 
 ---
 class: middle
@@ -166,7 +205,7 @@ document.querySelector('#my-blog');
                         ^ string here
 ```
 
-A note on convention: it's usually best to use `''` single quotes in your javascript code, and double quoates `""`
+A note on convention: it's usually best to use `''` single quotes in your javascript code, and double quotes `""`
 for things like your html attributes
 
 ---
@@ -253,7 +292,7 @@ if (name == 'goose') {
 ---
 class: middle
 
-Recall we can account for more conditions with<BR> `else` and `else if`:
+Recall we can check for additional conditions with<BR> `else if` and `else`:
 ```js
 let name = 'duck';
 
@@ -350,36 +389,6 @@ if (guess < eggs.length || guess > eggs.length) {
 ---
 class: middle
 
-Javascript is executed line by line as the html document is `parsed`.
-
-The document parsed these lines one by one:
-```html
-<!-- 1 --><!DOCTYPE html>
-<!-- 2 --><html lang="en" dir="ltr">
-<!-- 3 -->  <head>
-<!-- 4 -->    <meta charset="utf-8">
-<!-- 5 -->    <script src="example.js" type="text/javascript"></script>
-```
-So if we have anything in our script that refers to html elements in the page, those won't exist yet
-and result in errors...
----
-class: middle
-
-So remember we need to add the `defer` attribute to our script tags to tell the browser to apply Javascript
-code after the page has been completely parsed.
-
-```html
-<head>
-  <meta charset="utf-8">
-  <script src="example.js" defer type="text/javascript"></script>
-</head>
-```
-**note** this will only work for externally loaded files. Embded javascript, you'll need to place
-the script tag after the body or use other techniques we'll learn more about later..
-
----
-class: middle
-
 Let's recap how we access html elements in our Javascript code with `querySelector`.
 
 Remember that `querySelector` is a way to search for elements in our document based on *selectors* — like the
@@ -449,6 +458,11 @@ blogElement.classList.add('red');
 </script>
 
 ---
+class: middle center
+
+### Now let's learn another programming language concept
+
+---
 class: middle
 
 #### Functions
@@ -491,7 +505,7 @@ function sayHello(name) {
   console.log('oh, hello ' + name);
 }
 sayHello('Josephine');
-sayHello('Maryam'); // say hey to someone new
+sayHello('Maryam'); // say hello to someone new
 ```
 
 `arguments` within a `function` are `variables` that only exist within the `scope` or context
@@ -551,6 +565,34 @@ makeRed(document.querySelector('footer'));
 ---
 class: middle
 
+Another useful thing functions can do is send back a *value* from the code it contains.
+We use the `return` keyword to send back some value to the place where it was called.
+
+```js
+function scream(text){
+  return text.toUpperCase() + '!!!!';
+}
+
+let shouting = scream('hello class');
+console.log(shouting);
+console.log(scream('I hope this is all making sense 😅'));
+```
+So we can define a list of instructions that we might need to repeat often, call it at
+whatever point we want, but also return some result from that work to use.
+
+<script type="text/javascript">
+function scream(text){
+  return text.toUpperCase() + '!!!!';
+}
+
+let shouting = scream('hello class!');
+console.log(shouting);
+console.log(scream('I hope this is all making sense 😅'));
+</script>
+
+---
+class: middle
+
 ### Adding interactivity with Javascript
 
 Now that know how to reference an html element in our page, we can listen
@@ -563,7 +605,7 @@ To listen for events on an element, we use `addEventListener`.
 class: middle
 
 #### addEventListener()
-The `addEventListener` tells the browser to listen or watch an element for events
+The `addEventListener` method tells the browser to listen or watch an element for events
 that we specify and then call a function to run some code once that event occurs.
 
 We add listeners to the reference for a html element that we retreived from `document.querySelector`:
@@ -599,13 +641,18 @@ button.addEventListener('click', clickMe);
 ```
 When we use `clickMe()` with the parentheses on functions, the function is called at that moment.
 
+```js
+//  wrong ! : ((
+button.addEventListener('click', clickMe());
+```
+
 But since we want our function to be called later on when the event occurs, we only need to pass the
 `reference` or name of the function, and not the `clickMe()` full invocation of it.
 
 ---
 class: middle
 
-There are all sort sof events we can respond to, for instance `mouseover`:
+There are all kinds of events we can respond to, for instance `mouseover`:
 ```js
   function hoverElement(event) {
     console.log(event);
@@ -618,34 +665,36 @@ There are all sort sof events we can respond to, for instance `mouseover`:
 ```html
 <div class="borges-poem">
   <p>
-    I, who have felt the horror of <span>mirrors</span>
-    Not only in front of the <span>impenetrable crystal</span>
-    Where there ends and begins, uninhabitable,
+    I, who have felt the horror of <span>mirrors</span><BR>
+    Not only in front of the <span>impenetrable crystal</span><BR>
+    Where there ends and begins, uninhabitable,<BR>
     An impossible space of <span>reflections</span>,
   </p>
   <p>
-    But of gazing even on water that <span>mimics</span>
-    The other blue in its depth of sky,
-    That at times <span>gleams back</span> the illusory flight
+    But of gazing even on water that <span>mimics</span><BR>
+    The other blue in its depth of sky,<BR>
+    That at times <span>gleams back</span> the illusory flight<BR>
     Of the inverted bird, or that ripples,
   </p>
 </div>
 ```
+
+.footnote[poem via http://www.cabinetmagazine.org/issues/14/borges.php]
 
 ---
 class: middle
 
 <div class="borges-poem">
   <p>
-    I, who have felt the horror of <span>mirrors</span>
-    Not only in front of the <span>impenetrable crystal</span>
-    Where there ends and begins, uninhabitable,
+    I, who have felt the horror of <span>mirrors</span><BR>
+    Not only in front of the <span>impenetrable crystal</span><BR>
+    Where there ends and begins, uninhabitable,<BR>
     An impossible space of <span>reflections</span>,
   </p>
   <p>
-    But of gazing even on water that <span>mimics</span>
-    The other blue in its depth of sky,
-    That at times <span>gleams back</span> the illusory flight
+    But of gazing even on water that <span>mimics</span><BR>
+    The other blue in its depth of sky,<BR>
+    That at times <span>gleams back</span> the illusory flight<BR>
     Of the inverted bird, or that ripples,
   </p>
 </div>
@@ -669,19 +718,23 @@ Let's log the target to the console:
 function hoverElement(event) {
   console.log(event.target.tagName);
 }
+
+let poem = document.querySelector('.borges-poem');
+poem.addEventListener('mouseover', hoverElement);
 ```
+<hr>
 
 <div class="borges-poem-2">
   <p>
-    I, who have felt the horror of <span>mirrors</span>
-    Not only in front of the <span>impenetrable crystal</span>
-    Where there ends and begins, uninhabitable,
+    I, who have felt the horror of <span>mirrors</span><BR>
+    Not only in front of the <span>impenetrable crystal</span><BR>
+    Where there ends and begins, uninhabitable,<BR>
     An impossible space of <span>reflections</span>,
   </p>
   <p>
-    But of gazing even on water that <span>mimics</span>
-    The other blue in its depth of sky,
-    That at times <span>gleams back</span> the illusory flight
+    But of gazing even on water that <span>mimics</span><BR>
+    The other blue in its depth of sky,<BR>
+    That at times <span>gleams back</span> the illusory flight<BR>
     Of the inverted bird, or that ripples,
   </p>
 </div>
@@ -699,16 +752,11 @@ poem.addEventListener('mouseover', hoverElement2);
 class: middle
 
 We could add a `conditional` that checks whether we're hovering over a span element:
-```css
-span {
-  transition: background .5s ease-in-out;
-}
-```
 
 ```js
 function hoverElement(event) {
   if (event.target.tagName == 'SPAN') {
-    event.target.style.background = 'yellow';
+    event.target.classList.add('yellow');
   }
 }
 
@@ -716,27 +764,34 @@ let poem = document.querySelector('.borges-poem');
 poem.addEventListener('mouseover', hoverElement);
 ```
 
+Let's also add some transitioning css:
+```css
+span {
+  transition: background .5s ease-in-out;
+}
+```
+
 ---
 class: middle
 
 <div class="borges-poem-3">
   <p>
-    I, who have felt the horror of <span>mirrors</span>
-    Not only in front of the <span>impenetrable crystal</span>
-    Where there ends and begins, uninhabitable,
+    I, who have felt the horror of <span>mirrors</span><BR>
+    Not only in front of the <span>impenetrable crystal</span><BR>
+    Where there ends and begins, uninhabitable,<BR>
     An impossible space of <span>reflections</span>,
   </p>
   <p>
-    But of gazing even on water that <span>mimics</span>
-    The other blue in its depth of sky,
-    That at times <span>gleams back</span> the illusory flight
+    But of gazing even on water that <span>mimics</span><BR>
+    The other blue in its depth of sky,<BR>
+    That at times <span>gleams back</span> the illusory flight<BR>
     Of the inverted bird, or that ripples,
   </p>
 </div>
 <script type="text/javascript">
 function hoverElement3(event) {
   if (event.target.tagName == 'SPAN') {
-    event.target.style.background = 'yellow';
+    event.target.classList.add('yellow');
   }
 }
 
