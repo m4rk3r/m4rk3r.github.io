@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="fizzy-water.css">
+    <script src="fizzy-water.js" defer type="text/javascript"></script>
+    <title></title>
+  </head>
+  <body>
+    <main id="glass">
+      <div class="top"></div>
+      <div id="water">
+        <div class="top"></div>
+        <div class="bubble" style="left: 12%;top: 50%;"></div>
+        <div class="bubble" style="left: 50%;top: 20%;"></div>
+        <div class="bubble" style="left: 42%;top: 90%;"></div>
+        <div class="bubble" style="left: 82%;top: 80%;"></div>
+        <div class="bubble" style="left: 2%;top: 33%;"></div>
+        <div class="bubble" style="left: 22%;top: 66%;"></div>
+        <div class="bottom"></div>
+      </div>
+    </main>
+    <div id="table"></div>
+  </body>
+</html>

@@ -79,7 +79,7 @@ body {
   opacity: .75;
   z-index: 30;
 
-  transition: top .5s ease-in-out, opacity .5s ease-in-out;
+  transition: top .5s ease-in-out, opacity .75s ease-in-out;
   transition-delay: 0s, .5s;
   border: solid 1px #b4b4b4;
   border-width: 0 0 1px 1px;
