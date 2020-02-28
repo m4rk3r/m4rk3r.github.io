@@ -1,0 +1,98 @@
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#glass {
+  width: 30rem;
+  height: 55rem;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  background-color: rgb(227, 248, 255);
+  border-left: solid 1px #CCC;
+  border-right: solid 1px #CCC;
+  opacity: .85;
+  z-index: 5;
+}
+
+.top {
+  width: 30rem;
+  height: 15rem;
+  border-radius: 50%;
+  position: absolute;
+  top: -7.5rem;
+}
+.bottom {
+  width: 30rem;
+  height: 15rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -7.5rem;
+}
+
+#glass > .top {
+  background-color: rgb(227, 248, 255);
+  border: solid 1px #d9d9d9;
+  margin-left: -.1rem;
+}
+
+#water {
+  width: 30rem;
+  height: 35rem;
+  background-color: #a1f0ff;
+  position: relative;
+  z-index: 10;
+}
+#water .top {
+  background-color: #a1f0ff;
+  border: solid 1px #89ccd9;
+  box-sizing: border-box;
+}
+#water .bottom {
+  background-color: #a1f0ff;
+  border: solid 1px #89ccd9;
+  box-sizing: border-box;
+}
+
+
+.bubble {
+  position: absolute;
+  width: .8rem;
+  height: .8rem;
+
+  background: #FFF;
+  border-radius: 50%;
+  opacity: .75;
+  z-index: 30;
+
+  transition: top .5s ease-in-out, opacity .75s ease-in-out;
+  transition-delay: 0s, .5s;
+}
+
+.pop {
+  top: 0% !important;
+  opacity: 0;
+}
+
+#table {
+  width: 125vw;
+  height: 100vh;
+  position: absolute;
+  top: 60vh;
+  background: #FDE7F3;
+  transform: rotateZ(10deg);
+}

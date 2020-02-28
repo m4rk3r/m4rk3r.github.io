@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to JS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      html {
+        font-size: 24px;
+      }
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      .two-column ul {
+        columns: 2;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+
+      .fix-again-ugh .remark-code-line:nth-child(2),
+      .fix-multiline .remark-code-line:nth-child(3),
+      .fix-multiline .remark-code-line:nth-child(4) {
+        color: #888888;
+      }
+
+      .tree-img img {
+        display: block;
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      #more {
+        word-break: break-all;
+      }
+
+      .rotate-90 {
+        display: inline-block;
+        margin-left: 10px;
+        transform: rotateZ(90deg);
+      }
+
+      .red {
+        color: red;
+      }
+
+      .borges-poem-3 span {
+        transition: background .5s ease-in-out;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle center
+
+# Adding Interactivity:<BR> JavaScript and User Events
+
+---
+class: middle
+
+# but first a quick recap...
+
+---
+class: middle
+
+## How to use Javascript
+Similar to how we use CSS, javascript can be used embedded or linked
+
+#### embedded
+```html
+<script type="text/javascript">
+  console.log('hi class~');
+</script>
+```
+
+#### linked
+```html
+<script src="example.js" type="text/javascript"></script>
+```
+
+Like with CSS, the `linked` approach is the best way to use javascript.
+
+---
+class: middle
+
+#### Variables
+A variable is a container for a value that we can use throughout our code.
+We define a variable by using the `let` keyword in front of it.
+```js
+// variables can be any name you want..
+// so long as they are only made up of letters!
+let myVariable = 'hi';
+
+// this won't work
+let my variables = 'hi';
+
+// nor will this!!
+let my-variable = 'hi';
+
+// try to avoid this
+let my2ndVariable = 'hi';
+
+// this is ok, but javascript convention is to use "bumpy" case
+let my_variable = 'hi';
+```
+
+---
+class: middle
+
+### Values vocabulary
+There are several ways things can be represented in code, what we refer to as `types`.
+
+---
+class: middle
+
+#### strings
+A `string` is just a piece of text wrapped in either `''` single or `""` double quotes. Strings are made
+up of characters (like the `a` in "apple"). These sequences of characters *strung* together comprise a `string` <span class="rotate-90">: )</span>
+
+```js
+let myPoem = 'A long string / stung my head / to recall it';
+
+// Strings are used often in javascript
+document.querySelector('#my-blog');
+                        ^ string here
+```
+
+A note on convention: it's usually best to use `''` single quotes in your javascript code, and double quoates `""`
+for things like your html attributes
+
+---
+class: middle
+
+#### booleans
+A `boolean` is a value that is either true or false. They function as a toggle or flag, and
+are the value that conditionals check for.
+
+```js
+let isItNightOut = true;
+
+if (isItNightOut) {
+  document.querySelector('.fireflies').classList.add('wake-up');
+}
+```
+
+---
+class: middle
+
+Variables can hold lots of different values.. like `strings` and `numbers`:
+```js
+let myNumber = 10;
+// we can use console.log to see the variable in the console
+console.log(myNumber);
+
+let anotherVariable = 'hi';
+console.log(anotherVariable);
+
+// we can reuse a variable once we've created it!
+// note that we don't re-define it with `let` before
+// since it already exists
+anotherVariable = 'ho';
+console.log(anotherVariable);
+
+// here we're adding together the string "hi" to
+// our `anotherVariable` that is equal to "ho"
+let offToWorkWeGo = 'hi ' + anotherVariable;
+console.log(offToWorkWeGo);
+```
+<script type="text/javascript">
+console.log(10);
+
+let anotherVariable = 'hi';
+// we can use console.log to see the variable in the console
+console.log(anotherVariable);
+
+// we can reuse a variable once we've created it!
+anotherVariable = 'ho';
+console.log(anotherVariable);
+
+// here we're adding together the string "hi" to
+// our `anotherVariable` that is equal to "ho"
+let offToWorkWeGo = 'hi ' + anotherVariable;
+console.log(offToWorkWeGo);
+</script>
+
+---
+class: middle
+
+#### Conditionals
+A `conditional` is a way that we can ask a question and do different things based on the answer.
+Conditionals are written with an **`if` statement** with the question wrapped in parentheses `()` and
+the code to run if the question is true in `{ ... }` curly brackets:
+```js
+let name = 'goose';
+
+if (name == 'goose') {
+  console.log('run!!!');
+}
+```
+
+Often we use conditionals to compare one value to another. The way we compare values is with `Comparison Operators`.
+Above we're using the `==` comparator, which asks is the value on the left is the same as the value on the right.
+
+<script type="text/javascript">
+let name = 'goose';
+
+if (name == 'goose') {
+  console.log('run!!!');
+}
+</script>
+
+---
+class: middle
+
+Recall we can account for more conditions with<BR> `else` and `else if`:
+```js
+let name = 'duck';
+
+if (name == 'goose') {
+  console.log('run!!!');
+} else if(name == 'horse') {
+  console.log('um.. what game are you playing?');
+} else {
+  console.log('whew!');
+}
+```
+Here we and an `else if` condition checking for another possible value and an `else` for when the first two conditionals aren't true.
+
+<script type="text/javascript">
+let name = 'duck';
+
+if (name == 'goose') {
+  console.log('run!!!');
+} else {
+  console.log('whew!');
+}
+</script>
+
+---
+class: middle
+
+The questions you pose in conditionals can also be combined together to check for
+more complex conditions, for instance finding a range between two numbers.
+
+The two ways to combine these questions are with `operators`:
++ `&&` which stands for **and**: <BR>
+  `if (<thing is true> AND <thing is true>)`
++ `||` which stands for **or**: <BR>
+  `if (<thing is true> OR <thing is true>)`
+
+```js
+let age = 14;
+
+if (age >= 13 && age <= 19) {
+  console.log("You're a teen!");
+}
+
+if (age < 13 || age > 19) {
+  console.log('You are not a teen!');
+}
+```
+
+---
+class: middle
+
+Reworking last weeks guessing example:
+```js
+/*   __//
+    /.__.\
+    \ \/ /
+ '__/    \
+  \-      )
+   \_____/   -cf
+_____|_|____ */
+
+let eggs = '000000000000000000000000000000000000000000000000';
+
+let guess = window.prompt("Guess how many eggs?", 5);
+console.log("You guessed: " + guess);
+
+// how many eggs do we have?
+if (guess < eggs.length || guess > eggs.length) {
+  console.log("you're wrong!");
+} else if (guess == eggs.length) {
+  console.log("bingo!");
+}
+
+// or could be written:
+if (guess == eggs.length) {
+  console.log("bingo!");
+} else {
+  console.log("you're wrong!");
+}
+```
+
+<script type="text/javascript">
+let eggs = '000000000000000000000000000000000000000000000000';
+let guess = window.prompt("Guess how many eggs?", 5);
+console.log("You guessed: " + guess);
+
+// how many eggs do we have?
+if (guess < eggs.length || guess > eggs.length) {
+  console.log("you're wrong!");
+} else if (guess == eggs.length) {
+  console.log("bingo!");
+}
+</script>
+
+---
+class: middle
+
+Javascript is executed line by line as the html document is `parsed`.
+
+The document parsed these lines one by one:
+```html
+<!-- 1 --><!DOCTYPE html>
+<!-- 2 --><html lang="en" dir="ltr">
+<!-- 3 -->  <head>
+<!-- 4 -->    <meta charset="utf-8">
+<!-- 5 -->    <script src="example.js" type="text/javascript"></script>
+```
+So if we have anything in our script that refers to html elements in the page, those won't exist yet
+and result in errors...
+---
+class: middle
+
+So remember we need to add the `defer` attribute to our script tags to tell the browser to apply Javascript
+code after the page has been completely parsed.
+
+```html
+<head>
+  <meta charset="utf-8">
+  <script src="example.js" defer type="text/javascript"></script>
+</head>
+```
+**note** this will only work for externally loaded files. Embded javascript, you'll need to place
+the script tag after the body or use other techniques we'll learn more about later..
+
+---
+class: middle
+
+Let's recap how we access html elements in our Javascript code with `querySelector`.
+
+Remember that `querySelector` is a way to search for elements in our document based on *selectors* — like the
+css selectors we've learned about:
+
+```js
+let blogPost = document.querySelector('#blog');
+```
+Document refers to the `DOM` document.
+
+You can even use `pseudo-classes`:
+```js
+let lastGraph = document.querySelector('p:last-child');
+```
+
+---
+class: middle
+
+example.js:
+```js
+let blogElement = document.querySelector('#blog');
+console.log(blogElement);
+```
+example.html:
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="example.js" defer type="text/javascript"></script>
+  </head>
+  <body>
+      <main id="blog">hello class</main>
+  </body>
+</html>
+```
+
+<main id="blog-1">hello class</main>
+<script type="text/javascript">
+  let blogElement = document.querySelector('#blog-1');
+  console.log(blogElement);
+</script>
+
+---
+class: middle
+
+Now that we have a reference to our element in javascript, we can do something with it
+like adding a class:
+```css
+.red {
+  color: red;
+}
+```
+The `classList` attribute of a html element in javascript provides tools for adding, removing, and checking
+whether an element has a class.
+
+```js
+let blogElement = document.querySelector('#blog');
+blogElement.classList.add('red');
+```
+
+<div id="blog-2">hello class</div>
+
+<script type="text/javascript">
+  let blogElement = document.querySelector('#blog-2');
+  blogElement.classList.add('red');
+</script>
+
+---
+class: middle
+
+#### Functions
+Functions are a powerful concept that most programming languages employ.
+
+They allow us to set aside a group of instructions or code to execute at some later point.
+
+Functions are composed by specifying the `function` keyword and then providing a custom name for your `function`.
+The name is how we will later refer to it.
+
+```js
+function myFunction() {
+  // code to run later when we call the function goes in here
+}
+```
+at some later point...
+```js
+myFunction(); // lets call our function
+```
+
+---
+class: middle
+
+Functions can optionally receive additional details, called `arguments`, to make
+them more extensible and useful:
+
+```js
+function sayHi() {
+  console.log('Hi Josephine.');
+}
+sayHi();
+sayHi(); // say hi again
+```
+
+Instead of making the message we write to console fixed, we could use an `argument` to
+make the message we write dynamic:
+
+```js
+function sayHello(name) {
+  console.log('oh, hello ' + name);
+}
+sayHello('Josephine');
+sayHello('Maryam'); // say hey to someone new
+```
+
+`arguments` within a `function` are `variables` that only exist within the `scope` or context
+of the function.
+
+<script type="text/javascript">
+function sayHi() {
+  console.log('Hi Josephine.');
+}
+sayHi();
+
+function sayHello(name) {
+  console.log('oh, hello ' + name);
+}
+sayHello('Josephine');
+sayHello('Maryam');
+</script>
+
+---
+class: middle
+
+An important aspect of functions is that they help break up our code so that we don't
+have to repeat ourselves by copying and pasting code.
+
+We could instead incapsulate that code in a function and call it whenever we want
+to preform that set of actions.
+
+```js
+// from our previous example
+let blogElement = document.querySelector('#blog');
+blogElement.classList.add('red');
+let blogElement = document.querySelector('footer');
+footer.classList.add('red');
+
+// lets make this more reusable
+function makeRed(element) {
+  element.classList.add('red');
+}
+
+let blogElement = document.querySelector('#blog');
+makeRed(blogElement);
+makeRed(document.querySelector('footer'));
+```
+<div id="blog-3">My Blog</div>
+<footer>My Blog Footer</footer>
+
+<script type="text/javascript">
+  function makeRed(element) {
+    element.classList.add('red');
+  }
+
+  let blogElement = document.querySelector('#blog-3');
+  makeRed(blogElement);
+  makeRed(document.querySelector('footer'));
+</script>
+
+---
+class: middle
+
+### Adding interactivity with Javascript
+
+Now that know how to reference an html element in our page, we can listen
+for events on that element and perform actions based on it.
+
+To listen for events on an element, we use `addEventListener`.
+
+
+---
+class: middle
+
+#### addEventListener()
+The `addEventListener` tells the browser to listen or watch an element for events
+that we specify and then call a function to run some code once that event occurs.
+
+We add listeners to the reference for a html element that we retreived from `document.querySelector`:
+```html
+<button class="click-me">Click me!</button>
+```
+```js
+function clickMe() {
+  console.log('thanks for click~');
+}
+
+let button = document.querySelector('.click-me');
+button.addEventListener('click', clickMe);
+//                      ^ event  ^ function to call when event occurs
+```
+
+<button class="click-me">Click me!</button>
+<script type="text/javascript">
+  function clickMe() {
+    console.log('thanks for click~');
+  }
+
+  let button = document.querySelector('.click-me');
+  button.addEventListener('click', clickMe);
+</script>
+
+---
+class: middle
+
+Note that when we provide the function we want to be called to the listener, we don't include the `()` parentheses.
+```js
+button.addEventListener('click', clickMe);
+```
+When we use `clickMe()` with the parentheses on functions, the function is called at that moment.
+
+But since we want our function to be called later on when the event occurs, we only need to pass the
+`reference` or name of the function, and not the `clickMe()` full invocation of it.
+
+---
+class: middle
+
+There are all sort sof events we can respond to, for instance `mouseover`:
+```js
+  function hoverElement(event) {
+    console.log(event);
+  }
+
+  let poem = document.querySelector('.borges-poem');
+  poem.addEventListener('mouseover', hoverElement);
+```
+
+```html
+<div class="borges-poem">
+  <p>
+    I, who have felt the horror of <span>mirrors</span>
+    Not only in front of the <span>impenetrable crystal</span>
+    Where there ends and begins, uninhabitable,
+    An impossible space of <span>reflections</span>,
+  </p>
+  <p>
+    But of gazing even on water that <span>mimics</span>
+    The other blue in its depth of sky,
+    That at times <span>gleams back</span> the illusory flight
+    Of the inverted bird, or that ripples,
+  </p>
+</div>
+```
+
+---
+class: middle
+
+<div class="borges-poem">
+  <p>
+    I, who have felt the horror of <span>mirrors</span>
+    Not only in front of the <span>impenetrable crystal</span>
+    Where there ends and begins, uninhabitable,
+    An impossible space of <span>reflections</span>,
+  </p>
+  <p>
+    But of gazing even on water that <span>mimics</span>
+    The other blue in its depth of sky,
+    That at times <span>gleams back</span> the illusory flight
+    Of the inverted bird, or that ripples,
+  </p>
+</div>
+
+<script type="text/javascript">
+function hoverElement(event) {
+  console.log(event);
+}
+
+let poem = document.querySelector('.borges-poem');
+poem.addEventListener('mouseover', hoverElement);
+</script>
+
+---
+class: middle
+
+As you can see, our event has a bunch of info, but one thing of interest is the `target` or the thing triggering the event.
+
+Let's log the target to the console:
+```js
+function hoverElement(event) {
+  console.log(event.target.tagName);
+}
+```
+
+<div class="borges-poem-2">
+  <p>
+    I, who have felt the horror of <span>mirrors</span>
+    Not only in front of the <span>impenetrable crystal</span>
+    Where there ends and begins, uninhabitable,
+    An impossible space of <span>reflections</span>,
+  </p>
+  <p>
+    But of gazing even on water that <span>mimics</span>
+    The other blue in its depth of sky,
+    That at times <span>gleams back</span> the illusory flight
+    Of the inverted bird, or that ripples,
+  </p>
+</div>
+
+<script type="text/javascript">
+function hoverElement2(event) {
+  console.log(event.target.tagName);
+}
+
+let poem = document.querySelector('.borges-poem-2');
+poem.addEventListener('mouseover', hoverElement2);
+</script>
+
+---
+class: middle
+
+We could add a `conditional` that checks whether we're hovering over a span element:
+```css
+span {
+  transition: background .5s ease-in-out;
+}
+```
+
+```js
+function hoverElement(event) {
+  if (event.target.tagName == 'SPAN') {
+    event.target.style.background = 'yellow';
+  }
+}
+
+let poem = document.querySelector('.borges-poem');
+poem.addEventListener('mouseover', hoverElement);
+```
+
+---
+class: middle
+
+<div class="borges-poem-3">
+  <p>
+    I, who have felt the horror of <span>mirrors</span>
+    Not only in front of the <span>impenetrable crystal</span>
+    Where there ends and begins, uninhabitable,
+    An impossible space of <span>reflections</span>,
+  </p>
+  <p>
+    But of gazing even on water that <span>mimics</span>
+    The other blue in its depth of sky,
+    That at times <span>gleams back</span> the illusory flight
+    Of the inverted bird, or that ripples,
+  </p>
+</div>
+<script type="text/javascript">
+function hoverElement3(event) {
+  if (event.target.tagName == 'SPAN') {
+    event.target.style.background = 'yellow';
+  }
+}
+
+let poem = document.querySelector('.borges-poem-3');
+poem.addEventListener('mouseover', hoverElement3);
+</script>
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      // run any script tags contained within the active slide
+      slideshow.on('afterShowSlide', (slide) => {
+        var scripts = document.querySelector('.remark-visible').querySelectorAll('script');
+        for (var script of scripts) {
+          setTimeout(() => {
+            eval(script.innerText);
+          }, 100);
+        }
+      });
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname) {
+             links[i].target = '_blank';
+         }
+      }
+
+
+    </script>
+  </body>
+</html>
