@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to JS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      html {
+        font-size: 24px;
+      }
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      .two-column ul {
+        columns: 2;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+
+      .fix-again-ugh .remark-code-line:nth-child(2),
+      .fix-multiline .remark-code-line:nth-child(3),
+      .fix-multiline .remark-code-line:nth-child(4) {
+        color: #888888;
+      }
+
+      .tree-img img {
+        display: block;
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      #more {
+        word-break: break-all;
+      }
+
+      .rotate-90 {
+        display: inline-block;
+        margin-left: 10px;
+        transform: rotateZ(90deg);
+      }
+
+      .red {
+        color: red;
+      }
+
+      .borges-poem-3 span {
+        transition: background .5s ease-in-out;
+      }
+
+      .yellow {
+        background: yellow;
+      }
+
+      .borges-poem-2 {
+        font-size: .8rem;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle center
+
+# ~ Working with Text<BR> in JavaScript ~
+
+---
+class: middle
+
+# but first a quick recap...
+
+---
+class: middle
+
+#### Functions
+Functions allow us to set aside a group of instructions or code to execute at some later point.
+
+They are composed by specifying the `function` keyword and then providing a custom name for your `function`.
+The name is how we will later refer to it.
+
+```js
+function myFunction() {
+  // code to run later when we call the function goes in here
+}
+```
+at some later point...
+```js
+myFunction(); // lets call our function
+```
+
+---
+class: middle
+
+Functions can optionally receive additional details, called `arguments`, to make
+them more extensible and useful:
+
+```js
+function sayHi() {
+  console.log('Hi Josephine.');
+}
+sayHi();
+sayHi(); // say hi again
+```
+
+Instead of making the message we write to console fixed, we could use an `argument` to
+make the message we write dynamic:
+
+```js
+function sayHello(name) {
+  console.log('oh, hello ' + name);
+}
+sayHello('Josephine');
+sayHello('Maryam'); // say hello to someone new
+```
+
+`arguments` within a `function` are `variables` that only exist within the `scope` or context
+of the function.
+
+<script type="text/javascript">
+function sayHi() {
+  console.log('Hi Josephine.');
+}
+sayHi();
+
+function sayHello(name) {
+  console.log('oh, hello ' + name);
+}
+sayHello('Josephine');
+sayHello('Maryam');
+</script>
+
+---
+class: middle
+
+An important aspect of functions is that they help break up our code so that we don't
+have to repeat ourselves by copying and pasting code.
+
+```js
+// from our previous example
+let blogElement = document.querySelector('#blog');
+blogElement.classList.add('red');
+let blogElement = document.querySelector('footer');
+footer.classList.add('red');
+
+// lets make this more reusable
+function makeRed(element) {
+  element.classList.add('red');
+}
+
+let blogElement = document.querySelector('#blog');
+makeRed(blogElement);
+let footerElement = document.querySelector('footer');
+makeRed(footerElement);
+```
+<div id="blog-3">My Blog</div>
+<footer>My Blog Footer</footer>
+
+<script type="text/javascript">
+  function makeRed(element) {
+    element.classList.add('red');
+  }
+
+  let blogElement = document.querySelector('#blog-3');
+  makeRed(blogElement);
+  makeRed(document.querySelector('footer'));
+</script>
+
+---
+class: middle
+
+Another useful thing functions can do is send back a *value* from the code it contains.
+We use the `return` keyword to send back some value to the place where it was called.
+
+```js
+function scream(text){
+  return text.toUpperCase() + '!!!!';
+}
+
+let shouting = scream('hello class');
+console.log(shouting);
+console.log(scream('I hope this is all making sense 😅'));
+```
+So we can define a list of instructions that we might need to repeat often, call it at
+whatever point we want, but also return some result from that work to use.
+
+<script type="text/javascript">
+function scream(text){
+  return text.toUpperCase() + '!!!!';
+}
+
+let shouting = scream('hello class!');
+console.log(shouting);
+console.log(scream('I hope this is all making sense 😅'));
+</script>
+
+---
+class: middle
+
+#### addEventListener()
+The `addEventListener` method tells the browser to listen or watch an element for events
+that we specify and then call a function to run some code once that event occurs.
+
+We add listeners to the reference for a html element that we retreived from `document.querySelector`:
+```html
+<button class="click-me">Click me!</button>
+```
+```js
+function clickMe() {
+  console.log('thanks for click~');
+}
+
+let button = document.querySelector('.click-me');
+button.addEventListener('click', clickMe);
+//                      ^ event  ^ function to call when event occurs
+```
+
+<button class="click-me">Click me!</button>
+<script type="text/javascript">
+  function clickMe() {
+    console.log('thanks for click~');
+  }
+
+  let button = document.querySelector('.click-me');
+  button.addEventListener('click', clickMe);
+</script>
+
+---
+class: middle
+
+Note that when we provide the function we want to be called to the listener, we don't include the `()` parentheses.
+```js
+button.addEventListener('click', clickMe);
+```
+When we use `clickMe()` with the parentheses on functions, the function is called at that moment.
+
+```js
+//  wrong ! : ((
+button.addEventListener('click', clickMe());
+```
+
+But since we want our function to be called later on when the event occurs, we only need to pass the
+`reference` or name of the function, and not the `clickMe()` full invocation of it.
+
+
+---
+class: middle two-column
+
+#### When and why do we use functions?
+Let's look at a more concrete example to demonstrate how functions can help us.
+
+```html
+<h6>How are you feeling?</h6>
+<ul>
+  <li><button id="blissed">blissed</button></li>
+  <li><button id="stressed">stressed</button></li>
+  <li><button id="hungry">hungry</button></li>
+  <li><button id="content">content</button></li>
+</ul>
+<p>You are feeling: <span id="mood"></span></p>
+```
+
+You are feeling:
+<h6 style="margin: 5px 0;">How are you feeling?</h6>
+<ul>
+  <li><button>blissed</button></li>
+  <li><button>stressed</button></li>
+  <li><button>hungry</button></li>
+  <li><button>content</button></li>
+</ul>
+<p style="font-size: 14px;">You are feeling: <span></span></p>
+
+---
+class: middle
+
+Let's now add event listeners to those buttons for when they are clicked.
+
+---
+class: middle
+
+```js
+function blissedClick() {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = 'Blissed';
+  moodElement.style.color = 'forestgreen';
+}
+
+function stressedClick() {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = 'Stressed';
+  moodElement.style.color = 'red';
+}
+
+function hungryClick() {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = 'Hungry';
+  moodElement.style.color = 'blue';
+}
+
+function contentClick() {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = 'Content';
+  moodElement.style.color = 'lavender';
+}
+
+document.querySelector('#blissed').addEventListener('click', blissedClick);
+document.querySelector('#stressed').addEventListener('click', stressedClick);
+document.querySelector('#hungry').addEventListener('click', hungryClick);
+document.querySelector('#content').addEventListener('click', contentClick);
+```
+
+---
+class: middle two-column
+
+<h6>How are you feeling?</h6>
+<ul>
+  <li><button id="blissed">blissed</button></li>
+  <li><button id="stressed">stressed</button></li>
+  <li><button id="hungry">hungry</button></li>
+  <li><button id="content">content</button></li>
+</ul>
+<p>You are feeling: <span id="mood"></span></p>
+
+<script type="text/javascript">
+  function blissedClick() {
+    let moodElement = document.querySelector('#mood');
+    moodElement.innerHTML = 'Blissed';
+    moodElement.style.color = 'forestgreen';
+  }
+
+  function stressedClick() {
+    let moodElement = document.querySelector('#mood');
+    moodElement.innerHTML = 'Stressed';
+    moodElement.style.color = 'red';
+  }
+
+  function hungryClick() {
+    let moodElement = document.querySelector('#mood');
+    moodElement.innerHTML = 'Hungry';
+    moodElement.style.color = 'blue';
+  }
+
+  function contentClick() {
+    let moodElement = document.querySelector('#mood');
+    moodElement.innerHTML = 'Content';
+    moodElement.style.color = 'lavender';
+  }
+
+  console.log('running');
+  document.querySelector('#blissed').addEventListener('click', blissedClick);
+  document.querySelector('#stressed').addEventListener('click', stressedClick);
+  document.querySelector('#hungry').addEventListener('click', hungryClick);
+  document.querySelector('#content').addEventListener('click', contentClick);
+</script>
+
+---
+class: middle
+
+Functions can be a good way to consolidate your code and save yourself from repeating
+things:
+
+```js
+function moodClick() {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = <mood>;
+  moodElement.style.color = <color>;
+}
+```
+The only things the change between each mood is the name of the mood and color. So we could easily
+make those two items `arguments` to a more generic mood setter `function`:
+
+```js
+function setMood(mood, color) {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = mood;
+  moodElement.style.color = color;
+}
+
+function stressedClick() {
+  setMood('Stressed', 'red');
+}
+```
+
+---
+class: middle
+
+Beyond leading to less repetition, functions can make your code easier
+to update:
+
+```js
+function setMood(mood, color) {
+  let moodElement = document.querySelector('#mood');
+  moodElement.innerHTML = mood;
+  // moodElement.style.color = color;
+  // lets make the entire Your mood is.. section the color
+  moodElement.parentElement.style = 'color: ' + color;
+}
+```
+Instead of having to go through each individual mood function, we can just
+edit the more generic `setMood` when we want to make changes.
+
+---
+class: middle
+
+#### Arrays
+An `array` is a ordered collection of values that you can access one by one. You can think of an array
+as a variable that can store multiple values instead of just one.
+
+Arrays are composed with a beginning `[` square bracket, a list of items separated by `,` commas and then a closing
+`]` square bracket:
+```js
+let waitingList = ['Cassie', 'Irene', 'Lucas', 'Lexi', 'Morgan'];
+```
+The position of each element in an array is called its `index`
+
+Arrays are `zero indexed` which means the first element in the array is at position `0` and is
+accessed with using brackets:
+
+```js
+console.log(waitingList[0]);
+```
+
+<script type="text/javascript">
+let waitingList = ['Cassie', 'Irene', 'Lucas', 'Lexi'];
+console.log(waitingList[0]);
+</script>
+
+---
+class: middle
+
+Like other `variables`, an array can contain all sorts of different kinds of values, like `strings`,
+`numbers`, and `booleans`:
+
+```js
+let myArray = [0, 'hi', true, 100];
+```
+
+Arrays are a common way to express a group of items. For instance, `document.querySelector('#blog')` selects
+one element, but there is also `document.querySelectorAll('.bubble')` that selects all elements with the class
+bubble and returns it as a type of array.
+
+```js
+let bubbles = document.querySelectorAll('.bubble');
+// print first bubble to the console
+console.log(bubbles[0]);
+```
+
+---
+class: middle
+
+You can determine how many elements are in an array with the `length` parameter:
+```js
+let waitingList = ['Kayla', 'Zimo', 'Disha', 'Eva'];
+console.log('The waiting list is currently:', waitingList.length);
+```
+Or get the last item in the array:
+```js
+console.log(waitingList[waitingList.length - 1]);
+```
+...why `waitingList.length - 1`?
+
+Since arrays start at index `0` you need to adjust the length to match the index. There are 4 items in our array:
+```js
+let waitingList = ['Kayla', 'Zimo', 'Disha', 'Eva']; // 4 items
+//                 ^ 0      ^ 1     ^ 2      ^ 3
+```
+
+<script type="text/javascript">
+let waitingList2 =['Kayla', 'Zimo', 'Disha', 'Eva'];
+console.log('The waiting list is currently:', waitingList2.length);
+</script>
+
+---
+class: middle
+
+We can add or remove items from an array whenever we want:
+```js
+let waitingList = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+
+// lets add another name
+waitingList.push('Georgia');
+
+console.log(waitingList);
+```
+The `array.push()` adds an element to the end of an array. Or we could add to the front
+of the array with `array.unshift()`.
+
+Or we could remove elements from the array with the companion commands, `array.shift()` or
+`array.pop()`;
+```js
+// remove the first person
+let nextPersonInLine = waitingList.shift();
+console.log('the next person is:', nextPersonInLine, waitingList);
+
+// or the last person
+let cutTheLine = waitingList.pop();
+console.log('ooo cutting:', cutTheLine, waitingList);
+```
+
+<script type="text/javascript">
+let waitingList4 = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+waitingList4.push('Georgia');
+console.log(waitingList4);
+
+let nextPersonInLine = waitingList4.shift();
+console.log('the next person is:', nextPersonInLine, waitingList4);
+
+// or the last person
+let cutTheLine = waitingList4.pop()
+console.log('ooo cutting:', cutTheLine, waitingList4);
+</script>
+
+---
+class: middle
+
+As you can see, when you `unshift()`/`shift()` or `push()`/`pop()` changes the array
+itself.
+
+So if you want to keep the array as it is but access an element within it you can
+use `arrayName[index]` or to make changes to the array use the above methods..
+
+
+---
+class: middle
+
+#### Loops
+Now that we have new type of variable that can contain an endless number of values,
+it would be helpful to be able go over each value without having to do it manually.
+
+A `loop` is a way we can run a block of code over and over for a set number of times.
+One of the most common ways we loop in programs is called the `for` loop:
+
+```js
+for(let i = 0; i < waitingList.length; i++) {
+  console.log(waitingList[i],  'is position', i, 'in line!');
+}
+```
+
+---
+class: middle
+
+### breaking for loops down
+
+For loops are comprised of three parts. An `iterator` which is a variable we create
+to count each loop or `iteration` we've completed.
+```js
+for (let i = 0;
+```
+So here we create a `variable` called `i` and set it to value `0`
+
+---
+class: middle
+
+Next is a `conditional` that checks for when we want our loop to end:
+```js
+for (let i = 0; i < waitingList.length;
+```
+This says let the loop keep running so long as that our count variable `i` is less
+than the length of our array.
+
+---
+class: middle
+
+And finally we need to increase `i` *after* the code of the loop runs so that we can keep
+track of how many times we've&nbsp;looped:
+```js
+for (let i = 0; i < waitingList.length; i++ ) {
+```
+`i++` is the same as saying `i = i + 1` or `i += 1` e.g. make take `i` and add 1 to it.
+So that the first loop will be 0, second 1, third 2, and on so long as our conditional
+`i < waitingList.length` is true.
+
+---
+class: middle
+
+Putting it all together:
+```js
+for(let i = 0; i < waitingList.length; i++) {
+  console.log(waitingList[i],  'is position', i, 'in line!');
+}
+```
+
+<script type="text/javascript">
+let waitingList = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+for(let i = 0; i < waitingList.length; i++) {
+  console.log(waitingList[i], 'is position', i, 'in line!');
+}
+</script>
+
+---
+class: middle
+
+### Manipulating text in javascript~
+
+---
+class: middle
+
+#### strings
+A `string` is just a piece of text wrapped in either `''` single or `""` double quotes. Strings are made
+up of characters (like the `a` in "apple"). These sequences of characters *strung* together comprise a `string` <span class="rotate-90">: )</span>
+
+```js
+let myPoem = 'A long string / stung my head / to recall it';
+
+// Strings are used often in javascript
+document.querySelector('#my-blog');
+                        ^ string here
+```
+
+---
+class: middle
+
+Since `strings` are just a bunch of characters strung together, you can use them
+in a similar way to arrays:
+
+```js
+let myString = 'hello';
+console.log(myString[0]);
+```
+
+<script type="text/javascript">
+let myString = 'hello';
+console.log(myString[0]);
+</script>
+
+---
+class: middle
+
+You can search for the index (position) of a character or word within a string with `indexOf()`:
+```js
+let greeting = 'Hello how are you?';
+//                    ^ how starts at the 6th index position
+let howIndex = greeting.indexOf('how');
+console.log(howIndex);
+```
+<script type="text/javascript">
+let greeting = 'Hello how are you?';
+let howIndex = greeting.indexOf('how');
+console.log(howIndex);
+</script>
+
+---
+class: middle
+
+The `slice()` method enables us to return part of a string by specifying the start and end index
+we would like to *slice* by. Slice creates a new string and leaves the source alone.
+
+Slice takes at least one parameter, where to start the slice, and optionally where to end it.
+
+```js
+'hello'.slice(start, end);
+
+// or
+
+myStringVariable.slice(0, 5);
+```
+
+If you don't provide an end index, it will assume the rest of the string.
+
+---
+class: middle
+
+Let's make our greeting informal:
+```js
+let greeting = 'Hello sir, how are you?';
+
+// find the index of how
+let howIndex = greeting.indexOf('how');
+
+// slice the string to be 'how are you?'
+let informal = greeting.slice(howIndex);
+
+// capitalize the first characther ('h' in how)
+// and then return the rest of the string after that character
+informal = informal[0].toUpperCase() + informal.slice(1);
+console.log(informal);
+```
+
+<script type="text/javascript">
+let greeting = 'Hello mam, how are you?';
+
+// find the index of how
+let howIndex = greeting.indexOf('how');
+
+// slice the string to be 'how are you?'
+let informal = greeting.slice(howIndex);
+
+// capitalize the first characther ('h' in how)
+// and then return the rest of the string after that character
+informal = informal[0].toUpperCase() + informal.slice(1);
+console.log(informal);
+</script>
+
+---
+class: middle
+
+You can split up strings by a character with the `split()` method:
+
+```js
+let text = 'Hello class. Hope this is all very clear. If not, then pls ask a question.';
+```
+The `split()` method will split up the string based on the character you provide and return them as an array:
+```js
+// spilt our text by the periods
+let sentences = text.split('.');
+console.log(sentences);
+```
+which results in:
+```js
+["Hello class", " Hope this is all very clear", " If not, then pls ask a question", ""]
+//               ^ spaces after the period will be included
+```
+
+<script type="text/javascript">
+let text = 'Hello class. Hope this is all very clear. If not, then pls ask a question.';
+let sentences = text.split('.');
+console.log(sentences);
+</script>
+
+---
+class: middle
+
+We can recombine an array of strings with the `join()` method:
+```js
+let emphasis = sentences.join('!!!');
+console.log(emphasis);
+```
+
+<script type="text/javascript">
+let text = 'Hello class. Hope this is all very clear. If not, then pls ask a question.';
+let sentences = text.split('.');
+console.log(sentences.join('!!!'));
+</script>
+
+---
+class: middle
+
+We could break out a sentence into individual paragraph elements using javascript's
+ `document.createElement()` method and append them to a container element with `append()`:
+```html
+<div id="poem"></div>
+```
+
+```js
+let poemString = 'Rain in winter— / unhappy pine tree / longs for snow';
+let poem = poemString.split('/');
+let poemContainer = document.querySelector('#poem');
+
+for(let i = 0; i < poem.length; i++) {
+  // create a new paragraph element
+  let line = document.createElement('p');
+  // set the contents of the paragraph to our line at index i
+  line.innerHTML = poem[i];
+  poemContainer.append(line);
+}
+
+```
+<div id="poem" style="font-size: 16px;"></div>
+<script type="text/javascript">
+let poemString = 'Rain in winter— / unhappy pine tree / longs for snow';
+let poem = poemString.split('/');
+let poemContainer = document.querySelector('#poem');
+
+poemContainer.innerHTML = '';
+
+for(let i = 0; i < poem.length; i++) {
+  // create a new paragraph element
+  let line = document.createElement('p');
+  // set the contents of the paragraph to our line at index i
+  line.innerHTML = poem[i];
+  poemContainer.append(line);
+}
+</script>
+
+---
+class: middle
+
+We often end up needing to combine strings and variables to generate new strings.
+
+One way to achieve this is through `concatination` or adding things together:
+```js
+let weather = 'windy' // or get this from a weather service
+let info = 'Today the weather is ' + weather + '. Have a good day!';
+console.log(info)
+```
+
+<script type="text/javascript">
+let weather = 'windy' // or get this from a weather service
+let info = 'Today the weather is ' + weather + '. Have a good day!';
+console.log(info)
+</script>
+
+---
+class: middle
+
+A simpler way to combine strings and variables is with<BR> `template strings`. Template strings are
+a special kind of string definition using \` `backticks` instead of quotes " or ':
+```js
+let weather = 'rainy';
+let gear = 'umbrella';
+let info = `Today is ${weather}, hope you brought your ${gear}`;
+console.log(info);
+```
+With template strings, we can substitute in any variables within the string with the
+special `${ myVariable }` decleration. Anything within the `${` and `}` will be inserted
+in that position into the string.
+
+<script type="text/javascript">
+let weather = 'rainy';
+let gear = 'umbrella';
+let info = `Today is ${weather}, hope you brought your ${gear}!`;
+console.log(info);
+</script>
+
+---
+class: middle
+
+We could move our weather template string to a function and pass in the condition variables
+as arguments to have a flexible weather greeting:
+
+```js
+function weatherNotice(weather, gear) {
+  return `Today is ${weather}, hope you brought your ${gear}!`;
+}
+
+console.log(weatherNotice('rainy', 'umbrella'));
+
+// later that day
+console.log(weatherNotice('sunny', 'sunglasses'));
+
+console.log(weatherNotice('snowy', 'snow pants'));
+```
+
+<script type="text/javascript">
+function weatherNotice(weather, gear) {
+  return `Today is ${weather}, hope you brought your ${gear}!`;
+}
+
+console.log(weatherNotice('rainy', 'umbrella'));
+
+// later that day
+console.log(weatherNotice('sunny', 'sunglasses'));
+</script>
+
+---
+class: middle
+
+[There are a ton of things you can do with strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      // run any script tags contained within the active slide
+      slideshow.on('afterShowSlide', (slide) => {
+        var scripts = document.querySelector('.remark-visible').querySelectorAll('script');
+        for (var script of scripts) {
+          setTimeout(() => {
+            eval(script.innerText);
+          }, 100);
+        }
+      });
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname) {
+             links[i].target = '_blank';
+         }
+      }
+
+
+    </script>
+  </body>
+</html>
