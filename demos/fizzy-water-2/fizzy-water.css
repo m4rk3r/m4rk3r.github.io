@@ -1,0 +1,117 @@
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background: #ccc;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#glass {
+  width: 30rem;
+  height: 55rem;
+  background-color: #e3f8ff;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-left: solid 1px #CCC;
+  border-right: solid 1px #CCC;
+  z-index: 20;
+}
+
+.top {
+  position: absolute;
+  width: 30rem;
+  height: 15rem;
+  top: -7.5rem;
+  border-radius: 50%;
+}
+
+#glass > .top {
+  background-color: #f2fcff;
+  left: -.1rem;
+  border: solid 1px #d9d9d9;
+}
+
+#water {
+  width: 30rem;
+  height: 35rem;
+  background-color: #a1f0ff;
+  position: relative;
+}
+
+#water > .top {
+  background-color: #a1f0ff;
+  border: solid 1px #89ccd9;
+  box-sizing: border-box;
+}
+
+#water > .bottom {
+  width: 30rem;
+  height: 15rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -7.5rem;
+  background-color: #a1f0ff;
+  box-sizing: border-box;
+  border: solid 1px #89ccd9;
+}
+
+.bubble {
+  position: absolute;
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  opacity: .75;
+  background: #FFF;
+  border-left: solid 1px #333;
+  border-bottom: solid 1px #333;
+  z-index: 20;
+  transition: top .5s ease-in-out, opacity .75s ease-in-out;
+  transition-delay: 0s, .5s;
+}
+
+.bubble-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.bubble-wrapper .bubble:nth-child(1) {
+  top: 80%;
+  left: 24%;
+}
+.bubble-wrapper .bubble:nth-child(2) {
+  top: 47%;
+  left: 63%;
+}
+.bubble-wrapper .bubble:nth-child(3) {
+  top: 63%;
+  left: 77%;
+}
+.bubble-wrapper .bubble:nth-child(4) {
+  top: 40%;
+  left: 9%;
+}
+
+.bubble.pop {
+  top: 0% !important;
+  opacity: 0;
+}
+
+#table {
+  width: 125vw;
+  height: 100vh;
+  position: absolute;
+  top: 60vh;
+  background: #FDE7F3;
+  transform: rotateZ(10deg);
+}
