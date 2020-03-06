@@ -21,6 +21,18 @@ function releaseBubble(evt) {
   }
 }
 
+function releaseBubbles(evt) {
+  let bubbles = document.querySelectorAll('.bubble');
+  bubbles.forEach(function (bubble) {
+      bubble.classList.add('pop');
+      bubble.addEventListener('transitionend', bubblePopped);
+  });
+}
+
+
+const bubble = document.querySelector('#glass');
+bubble.addEventListener('click', releaseBubbles);
+
 
 const bubble = document.querySelector('#water');
 bubble.addEventListener('mouseover', releaseBubble);
