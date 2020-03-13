@@ -25,6 +25,7 @@ body {
   justify-content: flex-end;
   border-left: solid 1px #CCC;
   border-right: solid 1px #CCC;
+  z-index: 20;
 }
 
 .top {
@@ -72,8 +73,8 @@ body {
   border-radius: 50%;
   opacity: .75;
   background: #FFF;
-  border-left: solid 1px #333;
-  border-bottom: solid 1px #333;
+  border-left: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
   z-index: 20;
   transition: top .5s ease-in-out, opacity .75s ease-in-out;
   transition-delay: 0s, .5s;
@@ -104,4 +105,13 @@ body {
 .bubble.pop {
   top: 0% !important;
   opacity: 0;
+}
+
+#table {
+  width: 125vw;
+  height: 100vh;
+  position: absolute;
+  top: 60vh;
+  background: #FDE7F3;
+  transform: rotateZ(10deg);
 }
