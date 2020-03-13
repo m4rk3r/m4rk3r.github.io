@@ -1,0 +1,53 @@
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(25deg, rgb(62, 105, 58), rgb(104, 172, 96));
+  overflow: hidden;
+}
+
+pre {
+  position: absolute;
+  color: white;
+  z-index: 5;
+}
+
+pre:not(.boom) {
+  pointer-events: none;
+}
+
+.boom {
+  top: 5% !important;
+  left: 5% !important;
+}
+
+a pre {
+  transition: color .125s ease-in-out;
+}
+a:hover pre {
+  color: blue;
+}
+
+
+#pond {
+  width: 40vw;
+  height: 23vw;
+  border-radius: 34% 45% 44% 48%;
+  background: rgb(5, 56, 208);
+  position: absolute;
+  left: 45%;
+  top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+#pond iframe {
+  width: 80%;
+  height: 100%;
+  border: none;
+}

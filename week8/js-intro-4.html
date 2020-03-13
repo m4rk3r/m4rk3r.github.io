@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to JS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      html {
+        font-size: 24px;
+      }
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      .two-column ul {
+        columns: 2;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+
+      .fix-again-ugh .remark-code-line:nth-child(2),
+      .fix-multiline .remark-code-line:nth-child(3),
+      .fix-multiline .remark-code-line:nth-child(4) {
+        color: #888888;
+      }
+
+      .tree-img img {
+        display: block;
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      #more {
+        word-break: break-all;
+      }
+
+      .rotate-90 {
+        display: inline-block;
+        margin-left: 10px;
+        transform: rotateZ(90deg);
+      }
+
+      .red {
+        color: red;
+      }
+
+      .completed {
+        text-decoration: line-through;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle center
+
+# ~ Keyboard events in javascript ~
+
+---
+class: middle
+
+# but first a quick recap...
+
+---
+class: middle
+
+### Template strings
+
+Last week we covered how to insert variables into strings seamlessly using `template strings`
+
+Recall that template strings are composed by using *backticks* \`\` around our text instead of quotes and using
+the `${` and `}` to determine where to place the variable within the string.
+```js
+let weather = 'cloudy';
+console.log(`Today the weather is ${weather}`);
+```
+
+---
+class: middle
+
+Template strings make string formatting and concatenation (adding strings and other things together) much
+easier by eliminating the need to match quote levels and escape special characters:
+
+```js
+let name = 'Mark';
+let greeting = "Hello " + name + ", let's chat! " + name + " said \"hi class\"";
+                                                             //  ^ escape the
+```
+or now:
+```js
+let name = 'Mark';
+let greeting = `Hello ${mark}, let's chat! ${name} said "hi class"`;
+```
+
+---
+class: middle
+
+Another thing we can do is use template strings over multiple lines:
+
+```js
+let noun = 'pine tree'
+let myPoem = `
+  Rain in winter
+  unhappy ${noun}
+  longs for snow
+`;
+```
+vs the old way...
+```js
+let noun = 'squirrel';
+let myPoem = 'Rain in winter' +
+             'unhappy ' + noun +
+             'longs for snow';
+```
+
+---
+class: middle
+
+#### Arrays
+An `array` is a ordered collection of values that we can access one by one. We can think of an array
+as a variable that can store multiple values instead of just one.
+
+Arrays are composed with a beginning `[` square bracket, a list of items separated by `,` commas and then a closing
+`]` square bracket:
+```js
+let waitingList = ['Cassie', 'Irene', 'Lucas', 'Lexi', 'Morgan'];
+```
+The position of each element in an array is called its `index`
+
+Arrays are `zero indexed` which means the first element in the array is at position `0` and is
+accessed with using brackets:
+
+```js
+console.log(waitingList[0]);
+```
+
+<script type="text/javascript">
+let waitingList = ['Cassie', 'Irene', 'Lucas', 'Lexi'];
+console.log(waitingList[0]);
+</script>
+
+---
+class: middle
+
+Like other `variables`, an array can contain all sorts of different kinds of values, like `strings`,
+`numbers`, and `booleans`:
+
+```js
+let myArray = [0, 'hi', true, 100];
+```
+
+Arrays are a common way to express a group of items. For instance, `document.querySelector('#blog')` selects
+one element, but there is also `document.querySelectorAll('.bubble')` that selects all elements with the class
+bubble and returns it as a type of array.
+
+```js
+let bubbles = document.querySelectorAll('.bubble');
+// print first bubble to the console
+console.log(bubbles[0]);
+```
+
+---
+class: middle
+
+We can determine how many elements are in an array with the `length` parameter:
+```js
+let waitingList = ['Kayla', 'Zimo', 'Disha', 'Eva'];
+console.log('The waiting list is currently:', waitingList.length);
+```
+Or get the last item in the array:
+```js
+console.log(waitingList[waitingList.length - 1]);
+```
+...why `waitingList.length - 1`?
+
+Since arrays start at index `0` we need to adjust the length to match the index. There are 4 items in our array:
+```js
+let waitingList = ['Kayla', 'Zimo', 'Disha', 'Eva']; // 4 items
+//                 ^ 0      ^ 1     ^ 2      ^ 3
+```
+
+<script type="text/javascript">
+let waitingList2 =['Kayla', 'Zimo', 'Disha', 'Eva'];
+console.log('The waiting list is currently:', waitingList2.length);
+</script>
+
+---
+class: middle
+
+We can add or remove items from an array whenever we want:
+```js
+let waitingList = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+
+// lets add another name
+waitingList.push('Georgia');
+
+console.log(waitingList);
+```
+The `array.push()` adds an element to the end of an array. Or we could add to the front
+of the array with `array.unshift()`.
+
+Or we could remove elements from the array with the companion commands, `array.shift()` or
+`array.pop()`;
+```js
+// remove the first person
+let nextPersonInLine = waitingList.shift();
+console.log('the next person is:', nextPersonInLine, waitingList);
+
+// or the last person
+let cutTheLine = waitingList.pop();
+console.log('ooo cutting:', cutTheLine, waitingList);
+```
+
+<script type="text/javascript">
+let waitingList4 = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+waitingList4.push('Georgia');
+console.log(waitingList4);
+
+let nextPersonInLine = waitingList4.shift();
+console.log('the next person is:', nextPersonInLine, waitingList4);
+
+// or the last person
+let cutTheLine = waitingList4.pop()
+console.log('ooo cutting:', cutTheLine, waitingList4);
+</script>
+
+---
+class: middle
+
+As we can see, when we `unshift()`/`shift()` or `push()`/`pop()` changes the array
+itself.
+
+So if we want to keep the array as it is but access an element within it we can
+use `arrayName[index]` or to make changes to the array use the above methods..
+
+
+---
+class: middle
+
+#### For Loops
+
+A `loop` is a way we can run a block of code over and over for a set number of times.
+One of the most common ways we loop in programs is called the `for` loop:
+
+```js
+for(let i = 0; i < waitingList.length; i++) {
+  console.log(waitingList[i],  'is position', i, 'in line!');
+}
+```
+
+---
+class: middle
+
+### Anonymous functions
+
+We introduced briefly in our workshop last week the concept of an `anonymous function`.
+
+Anonymous Functions are like any other function except that they don't have a name
+and are used *in place* instead of being defined and named above before their use:
+
+```js
+function clickMe() {
+  console.log('You clicked me!!');
+}
+
+let button = document.querySelector('button');
+// we're now used to using event listeners like this
+button.addEventListener('click', clickMe);
+```
+
+but we could also write this like this:
+```js
+let button = document.querySelector('button');
+button.addEventListener('click', function () {
+  console.log('You clicked me!!!');
+});
+```
+
+---
+class: middle
+
+As we can see, instead of a standalone function defined above, we used an `anonymous`
+or unnamed function within the `addEventListener` definition:
+```js
+let button = document.querySelector('button');
+button.addEventListener('click', function () { // ← anonymous
+  console.log('You clicked me!!!');
+});
+```
+
+We'll see anonymous functions used more often in `forEach` and other types of advanced
+loops and filters...
+
+---
+class: middle
+
+### Other types of loops
+
+Another more condensed way to loop over a collection of items like DOM elements is the `forEach` loop.
+
+```html
+<ul class="ingredients">
+  <li>1 cup flour</li>
+  <li>1/2 cup sugar</li>
+  <li>1/2 cup milk</li>
+  <li>4 tbsp butter</li>
+  <li>1/4 cup chocolate chips</li>
+</ul>
+```
+
+```js
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  item.innerHTML = `Step ${index}: ${item.innerHTML}`;
+});
+```
+
+Note that we can use the second implicit argument of a `forEach` loop, the loop index,
+to add a step counter.
+
+---
+class: middle
+
+<ul class="ingredients">
+  <li>1 cup flour</li>
+  <li>1/2 cup sugar</li>
+  <li>1/2 cup milk</li>
+  <li>4 tbsp butter</li>
+  <li>1/4 cup chocolate chips</li>
+</ul>
+<hr>
+...since arrays are `zero indexed` we need to adjust our index by one
+to format it to start with 1.
+
+<script type="text/javascript">
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  if (!item.innerText.startsWith(`Step ${index}:`)) {
+    item.innerHTML = `Step ${index}: ${item.innerHTML}`;
+  }
+});
+</script>
+
+---
+class: middle
+
+```js
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  item.innerHTML = `Step ${index + 1}: ${item.innerHTML}`;
+                              // ^ fixed : )
+});
+```
+
+
+Let's say we also wanted to add a completed action for each item:
+
+```css
+.completed {
+  text-decoration: line-through;
+}
+```
+```js
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  item.innerHTML = `Step ${index + 1}: ${item.innerHTML}`;
+});
+let list = document.querySelector('.ingredients');
+list.addEventListener('click', function (event) {
+  if (event.target.tagName == 'LI') {
+    event.target.classList.add('completed');
+  }
+});
+```
+
+---
+class: middle
+
+<ul class="ingredients-2">
+  <li>1 cup flour</li>
+  <li>1/2 cup sugar</li>
+  <li>1/2 cup milk</li>
+  <li>4 tbsp butter</li>
+  <li>1/4 cup chocolate chips</li>
+</ul>
+
+<script type="text/javascript">
+let listItems = document.querySelectorAll('.ingredients-2 li');
+listItems.forEach(function (item, index) {
+  if (!item.innerText.startsWith(`Step ${index + 1}:`)) {
+    item.innerHTML = `Step ${index + 1}: ${item.innerHTML}`;
+  }
+});
+let list = document.querySelector('.ingredients-2');
+list.addEventListener('click', function (event) {
+  if (event.target.tagName == 'LI') {
+    event.target.classList.add('completed');
+  }
+});
+</script>
+
+---
+class: middle
+
+We can also use `forEach` loops on arrays.
+
+```js
+let colors = ['red', 'green', 'black', 'skyblue'];
+
+colors.forEach(function (color) {
+  console.log(color);
+});
+```
+This can be a more convenient way to go through an array of items instead of
+having to write out a for loop. <span class="rotate-90">: )</span>
+
+<script type="text/javascript">
+let colors = ['red', 'green', 'black', 'skyblue'];
+
+colors.forEach(function (color) {
+  console.log(color);
+});
+</script>
+
+---
+class: middle
+
+## Objects
+
+An `object` is another way to store variables in a structured way like an `array`.
+But instead of storing values in a set of numerical indices like an array, we
+can store items with *keys* that point to *values*.
+
+```js
+let myFavoriteThings = {
+  color: 'green',
+  flavor: 'umami',
+  sound: 'waterfall',
+  scent: 'geranium',
+  place: 'natural spaces'
+};
+
+// then later
+console.log(`My favorite sound is ${myFavoriteThings.sound}`);
+console.log(`My favorite color is ${myFavoriteThings['color']}`);
+```
+To access a value of an object, we use the *key* with dot notation `objectName.key` or with brackets like arrays `objectName['key']`
+
+<script type="text/javascript">
+let myFavoriteThings = {
+  color: 'green',
+  flavor: 'umami',
+  sound: 'waterfall',
+  scent: 'geranium',
+  place: 'natural spaces'
+};
+
+// then later
+console.log(`My favorite sound is ${myFavoriteThings.sound}`);
+console.log(`My favorite color is ${myFavoriteThings['color']}`);
+</script>
+
+---
+class: middle
+
+Last week we covered that arrays, like other `variables`, can contain all sorts of different kinds of values, like `strings`,
+`numbers`, and `booleans`:
+
+```js
+let myArray = [0, 'hi', true, 100];
+```
+
+Arrays can also hold `objects`
+
+```js
+let myOtherArray = [0, 'hi', {name: 'mark', color: 'green'}];
+console.log(myOtherArray[2].name);
+```
+
+<script type="text/javascript">
+let myOtherArray = [0, 'hi', {name: 'mark', color: 'green'}];
+console.log(myOtherArray[2].name);
+</script>
+
+---
+class: middle
+
+We can use an `array` of `objects` as a way to build out more complex *data structures*.
+
+```js
+let favoriteThings = [
+  { name: 'mark', color: 'green', flavor: 'umami'}
+];
+
+// rember `push` adds an item on to the end of an array
+favoriteThings.push({
+  name: 'eleanore',
+  color: 'blue',
+  flavor: 'sweet'
+});
+
+favoriteThings.push({
+  name: 'judd',
+  color: 'green',
+  flavor: 'salty'
+});
+
+console.log(peoplesFavoriteThings);
+```
+<script type="text/javascript">
+let marksFavoriteThings = { color: 'green', flavor: 'umami' };
+let favoriteThings = [marksFavoriteThings];
+
+// rember `push` adds an item on to the end of an array
+favoriteThings.push({
+  name: 'eleanore',
+  color: 'blue',
+  flavor: 'sweet'
+});
+
+favoriteThings.push({
+  name: 'judd',
+  color: 'green',
+  flavor: 'salty'
+});
+
+console.log(favoriteThings);
+</script>
+
+---
+class: middle
+
+We can search and filter arrays using the `find` and `filter` methods
+
+---
+class: middle
+
+The `find` method is similar to a `forEach` where it will loop over all the elements
+and pass them into a function we provide.
+
+```js
+// find first person who likes sweet things:
+let sweetTooth = favoriteThings.find(function (person) {
+  return person.flavor == 'sweet';
+});
+console.log(sweetTooth);
+```
+But instead of doing something with each person, `find` expects the function to
+return `true` or `false`. The first instance that returns `true` will end the loop
+and return that element.
+
+So in the example above we can see that we're using the `==` comparator to find
+the first person who's favorite flavor is exactly equal to 'sweet'.
+
+If no elements match and `true` is never returend, then the value `undefined` will
+be assigned to `sweetTooth`
+
+
+<script type="text/javascript">
+let favoriteThings = [
+  {
+    name: 'mark',
+    color: 'green',
+    flavor: 'umami'
+  },
+  {
+    name: 'eleanore',
+    color: 'blue',
+    flavor: 'sweet'
+  },
+  {
+    name: 'judd',
+    color: 'green',
+    flavor: 'salty'
+  }
+];
+
+// find first person who likes sweet things:
+let sweetTooth = favoriteThings.find(function (person) {
+  return person.flavor == 'sweet';
+});
+console.log(sweetTooth);
+</script>
+
+---
+class: middle
+
+If we wanted to select all the people who like the same thing,
+we can use the `filter` method.
+
+Like `find`, `filter` will loop over an array we provide and pass it to a function.
+But instead of returning the first element that returns `true`, it'll collect
+them and return a new array.
+
+```js
+// find everyone who likes green:
+let greenFavs = favoriteThings.filter(function (person) {
+  return person.color == 'green';
+});
+console.log(greenFavs);
+```
+
+<script type="text/javascript">
+let favoriteThings = [
+  {
+    name: 'mark',
+    color: 'green',
+    flavor: 'umami'
+  },
+  {
+    name: 'eleanore',
+    color: 'blue',
+    flavor: 'sweet'
+  },
+  {
+    name: 'judd',
+    color: 'green',
+    flavor: 'salty'
+  }
+];
+
+// find first person who likes sweet things:
+let greenFavs = favoriteThings.filter(function (person) {
+  return person.color == 'green';
+});
+console.log(greenFavs);
+</script>
+
+---
+class: middle
+
+## Responding to keyboard events
+Like click and mouseover events, we can also listen for keyboard events.
+
+There are two main keyboard events that we can listen for: `keydown` and `keyup`.
+
+The main distinction is that `keydown` will capture events when a key is pressed and held
+whereas a `keyup` event will only happen once when the key is released.
+
+---
+class: middle
+
+Let's print keyboard events we receive from an input box:
+
+```html
+<input id="textbox" type="text">
+```
+```js
+let textbox = document.querySelector('#textbox');
+textbox.addEventListener('keydown', function (event) {
+  console.log(event);
+});
+```
+
+<input id="textbox" type="text">
+
+<script type="text/javascript">
+let textbox = document.querySelector('#textbox');
+textbox.addEventListener('keypress', function (event) {
+  event.stopPropagation();
+  console.log(event);
+});
+</script>
+
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      // run any script tags contained within the active slide
+      slideshow.on('afterShowSlide', (slide) => {
+        var scripts = document.querySelector('.remark-visible').querySelectorAll('script');
+        for (var script of scripts) {
+          setTimeout(() => {
+            eval(script.innerText);
+          }, 100);
+        }
+      });
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname) {
+             links[i].target = '_blank';
+         }
+      }
+    </script>
+  </body>
+</html>
