@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      html {
+        font-size: 62.5%;
+      }
+      html, body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input {
+        font-size: 2rem;
+      }
+
+      .entry-box {
+        position: absolute;
+        font-size: 3rem;
+      }
+
+    </style>
+  </head>
+  <body>
+    <input id="text-box" type="text" name="" value="">
+  </body>
+  <script type="text/javascript">
+    let posX = 0;
+    let posY = 0;
+
+    function clickLog(evt) {
+      let entryBox = document.createElement('div');
+      entryBox.className = 'entry-box';
+
+      inputBox = document.querySelector('#text-box').value;
+      entryBox.innerHTML = inputBox;
+
+      entryBox.style.left = `${evt.pageX / window.innerWidth * 100}%`;
+      entryBox.style.top = `${evt.pageY / window.innerHeight * 100}%`;
+      document.querySelector('body').append(entryBox);
+    }
+
+    function clickIgnore(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+    }
+
+    function keypress(evt) {
+      let lastEntryBox = document.querySelector('body .entry-box:last-child');
+      lastEntryBox.innerHTML = lastEntryBox.innerHTML + evt.key;
+    }
+
+    let textBox = document.querySelector('#text-box');
+    textBox.addEventListener('keydown', keypress);
+    textBox.addEventListener('click', clickIgnore);
+    document.addEventListener('click', clickLog);
+  </script>
+</html>

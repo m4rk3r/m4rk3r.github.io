@@ -2,7 +2,7 @@
 
 
 let preTags = document.querySelectorAll('pre');
-let positions = [{x:9999999,y:999999}];
+let positions = [{x:5,y:5}];
 let x; let y;
 let placed;
 const buffer = 12;
