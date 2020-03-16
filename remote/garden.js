@@ -22,10 +22,8 @@ preTags.forEach(function (tag) {
              (y > pos.y - buffer && y < pos.y + buffer);
 
       const bcr = tag.getBoundingClientRect();
-      var xPos = window.innerWidth * x/100 + bcr.width/2;
-      var yPos = window.innerHeight * y/100 + bcr.height;
-      tag.setAttribute('x', xPos);
-      tag.setAttribute('y', xPos);
+      const xPos = window.innerWidth * x/100 + bcr.width/2;
+      const yPos = window.innerHeight * y/100 + bcr.height;
       const inPond = (xPos > pond.x && xPos < pond.x + pond.width && yPos > pond.y && yPos < pond.y + pond.height);
       return fit || inPond;
     }
@@ -40,7 +38,6 @@ preTags.forEach(function (tag) {
     if(loopBreak++ > 5000) {
       console.log('loop break..')
       placed = true;
-      tag.classList.add('broke');
     }
   }
 });
