@@ -1,0 +1,17 @@
+html {
+  font-size: 62.5%;
+  font-family: sans;
+}
+
+.input-wrapper {
+  display: flex;
+  margin: 1.5rem 0 3rem 0;
+}
+
+input {
+  width: 100%;
+}
+
+.sentence {
+  height: 3.5rem;
+}

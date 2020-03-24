@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="exercise.css">
+    <title>Exercise C</title>
+  </head>
+  <body>
+    <nav><a href="/">🏠 index</a></nav>
+    <h1>Exercise C: Variation Machine</h1>
+    <p>In this exercise, we will utilize the various <mark>string</mark> and <mark>array</mark> tools we've learned about to create three dynamic variations on a sentence.</p>
+
+    <main>
+      <h2>Steps</h2>
+      <ol>
+        <li>To begin, let's step back from code and think about how variations can be formed. Read an excerpt from <em>Exercises in Style</em> by the <a href="https://en.wikipedia.org/wiki/Oulipo" target="_blank">Oulipo</a> novelist, poet, and critic <a href="https://en.wikipedia.org/wiki/Raymond_Queneau" target="_blank">Raymond Queneau</a>. <a href="queneau-exercisesinstyle.pdf" target="_blank">PDF Link.</a></li>
+        <li>
+          Next, download the <a href="exercise-c.tar.gz" target="_blank">exercise template</a> and add it to your project folder that we've kept in sync with github.
+        </li>
+        <li>
+            Look at the <mark>index.js</mark> file for the three variation javascript functions. Preform your work within those functions on the <mark>newSentence</mark> variable that is outputted to the page. See the <mark>variationExample</mark> function for a guide on how to get started.
+            <BR><BR>
+            A few ideas to get you thinking:
+            <ul class="two-column">
+              <li>Swap the gender of third person pronouns with <mark>replace()</mark>.</li>
+              <li>Change letter case, punctuation, or order of words.. <mark>toUpperCase()</mark>, <mark>toLowerCase()</mark>, and <mark>slice()</mark></li>
+              <li>Work with the sentence as an array. Convert to array with <mark>split()</mark> and recombine to a string with <mark>join()</mark></li>
+              <li>You <a href="https://m4rk3r.github.io/week8/js-intro-4.html#19" target="_blank">can use objects</a> to create a <mark>key -> value</mark> relationship between words. <a href="../examples/swap-words.js" target="_blank">Here's an example.</a>
+              <li>You don't have to limit yourself to the words in the sentence itself. Think about the style of the sentence... bold, italics, and other ways of demarcating text.</li>
+            </ul>
+            <BR>
+            <a href="mailto:beasleym@newschool.edu">Email me</a> or seek out a tutor if there's something you want to achieve but can't seem to find the right method.
+        </li>
+        <li>
+            When you are done, add your project to your github <a href="/week1/cli-git.html">(git slides for refresher)</a> and then email the url
+            to <a href="mailto:beasleym@newschool.edu">me (beasleym@newschool.edu)</a>. Submit your variation machine no later than <b>Thursday, April 2nd by 8pm.</b>
+        </li>
+      </ol>
+
+      <h2>Resources</h2>
+      <ul>
+        <li>Refer back to our class lectures on <a href="https://m4rk3r.github.io/week7/js-intro-3.html" target="_blank">arrays and strings</a> and <a href="https://m4rk3r.github.io/week8/js-intro-4.html#1" target="_blank">arrays, objects, and keyboard events</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String Methods</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank">Array Methods</a></li>
+      </ul>
+
+      <hr>
+      <p>Next class we'll try out the variation machines you've created by inputting new sentences and discussing your process.</p>
+      <ul class="discussion">
+        <li>How will your machine handle new, unexpected input?</li>
+        <li>If it breaks or has no effect, did you account for that case?</li>
+        <li>Any particular challenges or struggles you encountered?</li>
+        <li>To what degree can your variation machine change the meaning of the input sentence?</li>
+      </ul>
+    </main>
+  </body>
+</html>
