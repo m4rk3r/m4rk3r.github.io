@@ -49,6 +49,7 @@ let input = document.querySelector('#sentence');
 // recomput when the input text changes
 input.addEventListener('input', function () {
   let sentence = input.value;
+  variationExample(sentence);
   variationOne(sentence);
   variationTwo(sentence);
   variationThree(sentence);
