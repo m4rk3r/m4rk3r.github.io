@@ -7,7 +7,7 @@ let swapWords = {
   grapefruit: 'banana',
 };
 
-// this returns all they "keys" or first part of the key -> value relationship
+// this returns all the "keys" or first part of the key -> value relationship
 let words = Object.keys(swapWords);
 
 // loop over each of our swap keys
