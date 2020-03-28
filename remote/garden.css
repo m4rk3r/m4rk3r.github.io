@@ -8,6 +8,7 @@ body {
   margin: 0;
   background: linear-gradient(25deg, rgb(62, 105, 58), rgb(104, 172, 96));
   overflow: hidden;
+  cursor: none;
 }
 
 pre {
@@ -50,4 +51,45 @@ a:hover pre {
   width: 80%;
   height: 100%;
   border: none;
+}
+
+.creature {
+  position: absolute;
+  z-index: 50;
+  transition: opacity 2s ease-in-out;
+  padding: 1.5rem;
+  /* border: solid 1px #FFF; */
+}
+.creature.self {
+  pointer-events: none;
+}
+.creature  span {
+  display: block;
+  /* width: .5rem; */
+  /* height: .5rem; */
+  border-radius: 50%;
+  /* background-color: skyblue; */
+}
+
+.creature.bee span {
+  transform: rotateZ(-90deg);
+}
+
+.creature.fade {
+  opacity: 0;
+}
+
+#info {
+  position: fixed;
+  right: .5rem;
+  top: .5rem;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+}
+#nickname {
+  margin-bottom: .5rem;
+}
+#creature-select {
+
 }

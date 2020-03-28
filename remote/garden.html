@@ -4,9 +4,18 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="garden.css">
+    <script type="text/javascript" src="socket.io.js"></script>
     <script type="text/javascript" defer src="garden.js"></script>
   </head>
   <body>
+    <div id="info">
+      <input type="text" id="nickname" placeholder="nickname..." />
+      <select id="creature-select">
+        <option value="cricket">cricket</option>
+        <option value="bee">bee</option>
+        <option value="dragonfly">dragonfly</option>
+      </select>
+    </div>
 
     <pre>
        __/)
@@ -214,6 +223,7 @@
 
   <div id="pond">
     <iframe src="https://class.duskjacket.com/"></iframe>
+    <!-- <iframe src="http://localhost:3500/"></iframe> -->
   </div>
 
 <a href="https://www.youtube.com/playlist?list=PL7sitz6OpLjvoi_hihJkCSfc8FksRW_QY&jct=eCOHnqisrucStB-DSjjjGXoyLT73Pw" target='_blank'>
