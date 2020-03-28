@@ -56,7 +56,7 @@ const creatures = ['cricket', 'bee', 'butterfly'];
 const creatureIcons = {
   cricket: '🦗',
   bee: '🐝',
-  butterlfy: '🦋'
+  butterlfly: '🦋'
 };
 let nickname = '';
 
