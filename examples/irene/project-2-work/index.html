@@ -1,0 +1,184 @@
+
+<!doctype html>
+<head>
+  <title>Have Fun</title>
+  <meta charset="utf-8">
+	<script   src="https://code.jquery.com/jquery-3.4.1.js"   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   crossorigin="anonymous"></script>
+<script type="text/javascript" defer src="index.js"></script>
+<style type="text/css">
+			@font-face{
+			font-family: "arb";
+			src: url("monosten_extrabold.otf");
+		}
+			@font-face{
+			font-family: "arr";
+			src: url("monosten_regular.otf");
+		}
+
+	body {
+
+  line-height: 1em;
+
+ /* font-family: 'chr';*/
+}
+/*#prounce{
+    font-family: 'arb';
+  font-size: 20px;
+position: absolute;
+
+  top: -40%;
+}*/
+#title{
+	  font-family: 'arb';
+  font-size: 40px;
+  color: black;
+  font-weight: 900;
+  position: fixed;
+  left: 18%;
+  top: 30%;
+}
+#content{
+  width: 80%;
+  height: 60%;
+  position: absolute;
+  left: 15%;
+  top: 10%;
+}
+.inner {
+/*  display:block;*/
+}
+.inner_p{
+   letter-spacing: -1px;
+}
+.letter{
+
+}
+.mark{
+
+}
+.spacing{
+
+}
+#prounce_group{
+ /*  background-color:rgba(217,223,224,0.6);*/
+ width:1020px;
+  padding: 10px;
+  position: absolute;
+  bottom: 15%;
+/*  height: 100px;*/
+  left: 0%;
+  margin: 10px auto;
+  word-wrap: break-word;
+  text-align:left;
+  cursor: text;
+  border-radius: 5px;
+   font-family: 'arr';
+
+   z-index: 101;
+      line-height: 100px;
+      font-size: 19px;
+
+
+
+}
+
+#container {
+    font-size: 80px;
+  background-color: rgba(217,223,224,0.9);
+  width: 1000px;
+  padding: 10px;
+  position: absolute;
+  bottom: 5%;
+/*  height: 100px;*/
+  left: 0%;
+  margin: 10px auto;
+  word-wrap: break-word;
+  text-align:left;
+  cursor: text;
+  border-radius: 5px;
+   font-family: 'arb';
+   letter-spacing: 0.7px;
+   z-index: 100;
+   line-height: 100px;
+
+     color: #2a4041;
+}
+#cursor {
+  font-size: 80px;
+  width: 10px;
+  height: 20px;
+  background-color: red;
+  color:  red;
+  animation: blinker 1s step-end infinite;
+  /*//you can change 'step-end' to 'linear' for smooth transition*/
+
+
+}
+#prounce_cursor{
+font-size: 20px;
+    width: 10px;
+  height: 20px;
+  background-color: transparent;
+  color:  transparent;
+
+}
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<div id = "content">
+
+	<div id="title">What did you do today?</div>
+
+
+
+<div id="prounce_group">
+    <span id="prounce_cursor">||</span>
+</div>
+<div id="container">
+  <span id="cursor">|</span>
+</div>
+
+</div>
+
+<audio class="one letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/a.wav" controls="controls"></source></audio>
+<audio class="two letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/b.mp3" controls="controls"></source></audio>
+<audio class="three letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/c.wav" controls="controls"></source></audio>
+<audio class="four letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/d.wav" controls="controls"></source></audio>
+<audio class="five letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/e.mp3" controls="controls"></source></audio>
+<audio class="six letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/f.mp3" controls="controls"></source></audio>
+<audio class="seven letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/g.wav" controls="controls"></source></audio>
+<audio class="eight letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/h.wav" controls="controls"></source></audio>
+<audio class="nine letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/i.wav" controls="controls"></source></audio>
+<audio class="ten letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/j.mp3" controls="controls"></source></audio>
+<audio class="eleven letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/k.wav" controls="controls"></source></audio>
+<audio class="twelve letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/l.wav" controls="controls"></source></audio>
+<audio class="thirteen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/m.mp3" controls="controls"></source></audio>
+<audio class="fourteen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/n.mp3" controls="controls"></source></audio>
+<audio class="fifteen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/o.wav" controls="controls"></source></audio>
+<audio class="sixteen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/p.mp3" controls="controls"></source></audio>
+<audio class="seventeen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/q.wav" controls="controls"></source></audio>
+<audio class="eighteen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/r.wav" controls="controls"></source></audio>
+<audio class="nineteen letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/s.wav" controls="controls"></source></audio>
+<audio class="twenty letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/t.wav" controls="controls"></source></audio>
+<audio class="twenty_one letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/u.wav" controls="controls"></source></audio>
+<audio class="twenty_two letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/v.wav" controls="controls"></source></audio>
+<audio class="twenty_three letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/w.wav" controls="controls"></source></audio>
+<audio class="twenty_four letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/x.mp3" controls="controls"></source></audio>
+<audio class="twenty_five letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/y.wav" controls="controls"></source></audio>
+<audio class="twenty_six letter"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/z.mp3" controls="controls"></source></audio>
+<audio class="twenty_seven mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/elephant.wav" controls="controls"></source></audio>
+<audio class="twenty_eight mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/dog.wav" controls="controls"></source></audio>
+<audio class="twenty_nine mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/monkey.wav" controls="controls"></source></audio>
+<audio class="thirty mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/rooster.mp3" controls="controls"></source></audio>
+<audio class="thirty_one mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/lion.mp3" controls="controls"></source></audio>
+<audio class="thirty_two mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/bear.wav" controls="controls"></source></audio>
+<audio class="thirty_three mark"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/fox.wav" controls="controls"></source></audio>
+<audio class="thirty_four spacing"><source src="http://teaching.synopticoffice.com/course/s20_pucd_2125g/projects/xuyou/exe2/sound3/rabbit.m4a" controls="controls"></source></audio>
+
+</body>
+</html>
