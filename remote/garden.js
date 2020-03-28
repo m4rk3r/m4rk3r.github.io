@@ -1,6 +1,4 @@
 
-// bee, dragon fly, butter fly,
-
 let preTags = document.querySelectorAll('pre');
 let positions = [{x:5,y:5}];
 let x; let y;
@@ -45,7 +43,7 @@ preTags.forEach(function (tag) {
 
 // telepresent creatures : )
 // var socket = io('http://localhost:3500');
-var socket = io('https://class.duskjacket.com', { path: '/'});
+var socket = io('https://class.duskjacket.com', { path: '/ws' });
 const uid = Math.random().toString(36).substr(2, 9);
 let posX = 0,
     posY = 0;
@@ -146,6 +144,7 @@ const drawCreatures = creatures => {
 }
 
 socket.on('connect', () => {
+  console.log('connected...')
   let ts = Date.now();
   const tick = () => {
     if (Date.now() - ts > 16) {
