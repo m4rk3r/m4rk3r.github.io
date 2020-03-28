@@ -130,7 +130,7 @@ const drawCreatures = creatures => {
       }
 
       if (!c.classList.contains(creature.creature)) {
-        bug.innerText = creatureIcons[creature.creature];
+        c.querySelector('span').innerText = creatureIcons[creature.creature];
         c.className = `creature ${creature.creature}`;
       }
 
