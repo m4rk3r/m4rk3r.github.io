@@ -52,17 +52,24 @@ let offsetX = 15 / window.innerWidth * 100;
 let offsetY = 15 / window.innerHeight * 100;
 
 const creatureExpiry = {};
-const creatures = ['cricket', 'bee', 'butterfly'];
+const creatures = ['cricket', 'bee', 'butterfly', 'ant', 'duck', 'lizard', 'ladybug', 'bug', 'snail'];
 const creatureIcons = {
   cricket: '🦗',
   bee: '🐝',
-  butterfly: '🦋'
+  butterfly: '🦋',
+  ant: '🐜',
+  duck: '🦆',
+  lizard: '🦎',
+  ladybug: '🐞',
+  bug: '🐛',
+  snail: '🐌'
 };
 let nickname = '';
 
 let creature = creatures[Math.round(Math.random() * (creatures.length-1))];
 const creatureSelect = document.querySelector('#creature-select');
-creatureSelect.querySelector(`option[value='${creature}']`).selected = true;
+creatures.forEach(c => creatureSelect.innerHTML += `<option value="${c}" ${ creature === c ? 'selected="true"' : ''}>${creatureIcons[c]} ${c}</option>`);
+//creatureSelect.querySelector(`option[value='${creature}']`).selected = true;
 
 creatureSelect.addEventListener('change', (evt) => {
   creature = evt.target.value;
