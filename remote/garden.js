@@ -131,7 +131,7 @@ const drawCreatures = creatures => {
 
       if (!c.classList.contains(creature.creature)) {
         c.querySelector('span').innerText = creatureIcons[creature.creature];
-        c.className = `creature ${creature.creature}`;
+        c.className = `creature ${creature.creature} ${ uid === creature.id ? 'self' : ''}`;
       }
 
       // add fade timeouts for other bugs
