@@ -43,7 +43,11 @@ preTags.forEach(function (tag) {
 
 // telepresent creatures : )
 // var socket = io('http://localhost:3500');
-var socket = io('https://class.duskjacket.com', { path: '/ws' });
+var socket = io('https://class.duskjacket.com', {
+    path: '/ws',
+    transports: ['websocket']
+});
+
 const uid = Math.random().toString(36).substr(2, 9);
 let posX = 0,
     posY = 0;
