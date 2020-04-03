@@ -51,7 +51,10 @@ h3 {
   30% { opacity: 0;  }
   40% { content: '💛'; opacity: 1; }
   50% { opacity: 0;  }
-  60% { content: '💜'; opacity: 1; }
+  60% { contenx-special/nautilus-clipboard
+copy
+file:///home/mark/Pictures/garden.png
+t: '💜'; opacity: 1; }
   70% { opacity: 0;  }
   80% { content: '❤️'; opacity: 1; }
   90% { opacity: 0;  }
@@ -66,4 +69,29 @@ h3 {
   content: '💙';
   animation: heart 5s ease-in-out infinite;
   margin-left: .5rem;
+}
+
+#garden {
+  position: absolute;
+  top: 5rem;
+  right: 2rem;
+  text-align: center;
+}
+#garden figure {
+  position: relative;
+}
+#garden figure .shadow {
+  position: absolute;
+  top:0;
+  left: .7rem;
+  width: 12.5rem;
+  height: 12.5rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 1.5rem #656565;
+}
+#garden img {
+  width: 12.5rem;
+  height: 12.5rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
