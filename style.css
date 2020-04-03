@@ -21,6 +21,9 @@ a {
 a:hover {
   color: #E9A9CB;
 }
+.classes {
+  margin-bottom: 10rem;
+}
 ul {
   list-style-type: '~ ';
 }
