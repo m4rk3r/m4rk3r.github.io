@@ -168,3 +168,9 @@ socket.on('connect', () => {
 });
 
 socket.on('pong', drawCreatures);
+
+document.addEventListener('keyup', (evt) => {
+  if (evt.key === 'm' && evt.target.tagName !== "TEXTAREA") {
+    document.querySelector('#msg').classList.toggle('hidden');
+  }
+})
