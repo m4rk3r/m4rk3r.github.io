@@ -73,7 +73,6 @@ let nickname = '';
 let creature = creatures[Math.round(Math.random() * (creatures.length-1))];
 const creatureSelect = document.querySelector('#creature-select');
 creatures.forEach(c => creatureSelect.innerHTML += `<option value="${c}" ${ creature === c ? 'selected="true"' : ''}>${creatureIcons[c]} ${c}</option>`);
-//creatureSelect.querySelector(`option[value='${creature}']`).selected = true;
 
 creatureSelect.addEventListener('change', (evt) => {
   creature = evt.target.value;
