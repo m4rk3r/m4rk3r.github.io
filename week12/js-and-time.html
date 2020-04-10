@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to JS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      html {
+        font-size: 24px;
+      }
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      .two-column ul {
+        columns: 2;
+      }
+      .three-column ul {
+        columns: 3;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+
+      .fix-again-ugh .remark-code-line:nth-child(2),
+      .fix-multiline .remark-code-line:nth-child(3),
+      .fix-multiline .remark-code-line:nth-child(4) {
+        color: #888888;
+      }
+
+      .tree-img img {
+        display: block;
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      #more {
+        word-break: break-all;
+      }
+
+      .rotate-90 {
+        display: inline-block;
+        margin-left: 10px;
+        transform: rotateZ(90deg);
+      }
+
+      .red {
+        color: red;
+      }
+
+      .completed {
+        text-decoration: line-through;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle center
+
+# ~ JS and time ~
+
+---
+class: middle
+
+But first let's recap where we left off...
+
+---
+class: middle
+
+### Template strings
+
+How to insert variables into strings seamlessly using `template strings`
+
+Recall that template strings are composed by using *backticks* \`\` around our text instead of quotes and using
+the `${` and `}` to determine where to place the variable within the string.
+```js
+let weather = 'cloudy';
+console.log(`Today the weather is ${weather}`);
+```
+
+---
+class: middle
+
+Template strings make string formatting and concatenation (adding strings and other things together) much
+easier by eliminating the need to match quote levels and escape special characters:
+
+```js
+let name = 'Mark';
+let greeting = "Hello " + name + ", let's chat! " + name + " said \"hi class\"";
+                                                             //  ^ escape the
+```
+or now:
+```js
+let name = 'Mark';
+let greeting = `Hello ${mark}, let's chat! ${name} said "hi class"`;
+```
+
+---
+class: middle
+
+Another thing we can do is use template strings over multiple lines:
+
+```js
+let noun = 'pine tree'
+let myPoem = `
+  Rain in winter
+  unhappy ${noun}
+  longs for snow
+`;
+```
+vs the old way...
+```js
+let noun = 'squirrel';
+let myPoem = 'Rain in winter' +
+             'unhappy ' + noun +
+             'longs for snow';
+```
+
+---
+class: middle
+
+#### Arrays
+An `array` is a ordered collection of values that we can access one by one. We can think of an array
+as a variable that can store multiple values instead of just one.
+
+Arrays are composed with a beginning `[` square bracket, a list of items separated by `,` commas and then a closing
+`]` square bracket:
+```js
+let waitingList = ['Cassie', 'Irene', 'Lucas', 'Lexi', 'Morgan'];
+```
+The position of each element in an array is called its `index`
+
+Arrays are `zero indexed` which means the first element in the array is at position `0` and is
+accessed with using brackets:
+
+```js
+console.log(waitingList[0]);
+```
+
+<script type="text/javascript">
+let waitingList = ['Cassie', 'Irene', 'Lucas', 'Lexi'];
+console.log(waitingList[0]);
+</script>
+
+---
+class: middle
+
+Like other `variables`, an array can contain all sorts of different kinds of values, like `strings`,
+`numbers`, and `booleans`:
+
+```js
+let myArray = [0, 'hi', true, 100];
+```
+
+Arrays are a common way to express a group of items. For instance, `document.querySelector('#blog')` selects
+one element, but there is also `document.querySelectorAll('.bubble')` that selects all elements with the class
+bubble and returns it as a type of array.
+
+```js
+let bubbles = document.querySelectorAll('.bubble');
+// print first bubble to the console
+console.log(bubbles[0]);
+```
+
+---
+class: middle
+
+We can determine how many elements are in an array with the `length` parameter:
+```js
+let waitingList = ['Kayla', 'Zimo', 'Disha', 'Eva'];
+console.log('The waiting list is currently:', waitingList.length);
+```
+Or get the last item in the array:
+```js
+console.log(waitingList[waitingList.length - 1]);
+```
+...why `waitingList.length - 1`?
+
+Since arrays start at index `0` we need to adjust the length to match the index. There are 4 items in our array:
+```js
+let waitingList = ['Kayla', 'Zimo', 'Disha', 'Eva']; // 4 items
+//                 ^ 0      ^ 1     ^ 2      ^ 3
+```
+
+<script type="text/javascript">
+let waitingList2 =['Kayla', 'Zimo', 'Disha', 'Eva'];
+console.log('The waiting list is currently:', waitingList2.length);
+</script>
+
+---
+class: middle
+
+We can add or remove items from an array whenever we want:
+```js
+let waitingList = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+
+// lets add another name
+waitingList.push('Georgia');
+
+console.log(waitingList);
+```
+The `array.push()` adds an element to the end of an array. Or we could add to the front
+of the array with `array.unshift()`.
+
+Or we could remove elements from the array with the companion commands, `array.shift()` or
+`array.pop()`;
+```js
+// remove the first person
+let nextPersonInLine = waitingList.shift();
+console.log('the next person is:', nextPersonInLine, waitingList);
+
+// or the last person
+let cutTheLine = waitingList.pop();
+console.log('ooo cutting:', cutTheLine, waitingList);
+```
+
+<script type="text/javascript">
+let waitingList4 = ['Hwei-Shin', 'Miranda', 'Zhanyi', 'Ayesha', 'Sherry'];
+waitingList4.push('Georgia');
+console.log(waitingList4);
+
+let nextPersonInLine = waitingList4.shift();
+console.log('the next person is:', nextPersonInLine, waitingList4);
+
+// or the last person
+let cutTheLine = waitingList4.pop()
+console.log('ooo cutting:', cutTheLine, waitingList4);
+</script>
+
+---
+class: middle
+
+As we can see, when we `unshift()`/`shift()` or `push()`/`pop()` changes the array
+itself.
+
+So if we want to keep the array as it is but access an element within it we can
+use `arrayName[index]` or to make changes to the array use the above methods..
+
+
+---
+class: middle
+
+#### For Loops
+
+A `loop` is a way we can run a block of code over and over for a set number of times.
+One of the most common ways we loop in programs is called the `for` loop:
+
+```js
+for(let i = 0; i < waitingList.length; i++) {
+  console.log(waitingList[i],  'is position', i, 'in line!');
+}
+```
+
+---
+class: middle
+
+### Anonymous functions
+
+We introduced briefly in our workshop last week the concept of an `anonymous function`.
+
+Anonymous Functions are like any other function except that they don't have a name
+and are used *in place* instead of being defined and named above before their use:
+
+```js
+function clickMe() {
+  console.log('You clicked me!!');
+}
+
+let button = document.querySelector('button');
+// we're now used to using event listeners like this
+button.addEventListener('click', clickMe);
+```
+
+but we could also write this like this:
+```js
+let button = document.querySelector('button');
+button.addEventListener('click', function () {
+  console.log('You clicked me!!!');
+});
+```
+
+---
+class: middle
+
+As we can see, instead of a standalone function defined above, we used an `anonymous`
+or unnamed function within the `addEventListener` definition:
+```js
+let button = document.querySelector('button');
+button.addEventListener('click', function () { // ← anonymous
+  console.log('You clicked me!!!');
+});
+```
+
+We'll see anonymous functions used more often in `forEach` and other types of advanced
+loops and filters...
+
+---
+class: middle
+
+### Other types of loops
+
+Another more condensed way to loop over a collection of items like DOM elements is the `forEach` loop.
+
+```html
+<ul class="ingredients">
+  <li>1 cup flour</li>
+  <li>1/2 cup sugar</li>
+  <li>1/2 cup milk</li>
+  <li>4 tbsp butter</li>
+  <li>1/4 cup chocolate chips</li>
+</ul>
+```
+
+```js
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  item.innerHTML = `Step ${index}: ${item.innerHTML}`;
+});
+```
+
+Note that we can use the second implicit argument of a `forEach` loop, the loop index,
+to add a step counter.
+
+---
+class: middle
+
+<ul class="ingredients">
+  <li>1 cup flour</li>
+  <li>1/2 cup sugar</li>
+  <li>1/2 cup milk</li>
+  <li>4 tbsp butter</li>
+  <li>1/4 cup chocolate chips</li>
+</ul>
+<hr>
+...since arrays are `zero indexed` we need to adjust our index by one
+to format it to start with 1.
+
+<script type="text/javascript">
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  if (!item.innerText.startsWith(`Step ${index}:`)) {
+    item.innerHTML = `Step ${index}: ${item.innerHTML}`;
+  }
+});
+</script>
+
+---
+class: middle
+
+```js
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  item.innerHTML = `Step ${index + 1}: ${item.innerHTML}`;
+                              // ^ fixed : )
+});
+```
+
+
+Let's say we also wanted to add a completed action for each item:
+
+```css
+.completed {
+  text-decoration: line-through;
+}
+```
+```js
+let listItems = document.querySelectorAll('.ingredients li');
+listItems.forEach(function (item, index) {
+  item.innerHTML = `Step ${index + 1}: ${item.innerHTML}`;
+});
+let list = document.querySelector('.ingredients');
+list.addEventListener('click', function (event) {
+  if (event.target.tagName == 'LI') {
+    event.target.classList.add('completed');
+  }
+});
+```
+
+---
+class: middle
+
+<ul class="ingredients-2">
+  <li>1 cup flour</li>
+  <li>1/2 cup sugar</li>
+  <li>1/2 cup milk</li>
+  <li>4 tbsp butter</li>
+  <li>1/4 cup chocolate chips</li>
+</ul>
+
+<script type="text/javascript">
+let listItems = document.querySelectorAll('.ingredients-2 li');
+listItems.forEach(function (item, index) {
+  if (!item.innerText.startsWith(`Step ${index + 1}:`)) {
+    item.innerHTML = `Step ${index + 1}: ${item.innerHTML}`;
+  }
+});
+let list = document.querySelector('.ingredients-2');
+list.addEventListener('click', function (event) {
+  if (event.target.tagName == 'LI') {
+    event.target.classList.add('completed');
+  }
+});
+</script>
+
+---
+class: middle
+
+We can also use `forEach` loops on arrays.
+
+```js
+let colors = ['red', 'green', 'black', 'skyblue'];
+
+colors.forEach(function (color) {
+  console.log(color);
+});
+```
+This can be a more convenient way to go through an array of items instead of
+having to write out a for loop. <span class="rotate-90">: )</span>
+
+<script type="text/javascript">
+let colors = ['red', 'green', 'black', 'skyblue'];
+
+colors.forEach(function (color) {
+  console.log(color);
+});
+</script>
+
+---
+class: middle
+
+## Objects
+
+An `object` is another way to store variables in a structured way like an `array`.
+But instead of storing values in a set of numerical indices like an array, we
+can store items with *keys* that point to *values*.
+
+```js
+let myFavoriteThings = {
+  'color': 'green',
+  'flavor': 'umami',
+  'sound': 'waterfall',
+  'scent': 'geranium',
+  'place': 'natural spaces'
+};
+
+// then later
+console.log(`My favorite sound is ${myFavoriteThings.sound}`);
+console.log(`My favorite color is ${myFavoriteThings['color']}`);
+```
+To access a value of an object, we use the *key* with dot notation `objectName.key` or with brackets like arrays `objectName['key']`
+
+<script type="text/javascript">
+let myFavoriteThings = {
+  'color': 'green',
+  'flavor': 'umami',
+  'sound': 'waterfall',
+  'scent': 'geranium',
+  'place': 'natural spaces'
+};
+
+// then later
+console.log(`My favorite sound is ${myFavoriteThings.sound}`);
+console.log(`My favorite color is ${myFavoriteThings['color']}`);
+</script>
+
+---
+class: middle
+
+We also learned that arrays, like other `variables`, can contain all sorts of different kinds of values, like `strings`,
+`numbers`, and `booleans`:
+
+```js
+let myArray = [0, 'hi', true, 100];
+```
+
+Arrays can also hold `objects`
+
+```js
+let myOtherArray = [0, 'hi', {name: 'mark', color: 'green'}];
+console.log(myOtherArray[2].name);
+```
+
+<script type="text/javascript">
+let myOtherArray = [0, 'hi', {name: 'mark', color: 'green'}];
+console.log(myOtherArray[2].name);
+</script>
+
+---
+class: middle
+
+We can use an `array` of `objects` as a way to build out more complex *data structures*.
+
+```js
+let favoriteThings = [
+  { name: 'mark', color: 'green', flavor: 'umami'}
+];
+
+// rember `push` adds an item on to the end of an array
+favoriteThings.push({
+  name: 'eleanore',
+  color: 'blue',
+  flavor: 'sweet'
+});
+
+favoriteThings.push({
+  name: 'judd',
+  color: 'green',
+  flavor: 'salty'
+});
+
+console.log(peoplesFavoriteThings);
+```
+<script type="text/javascript">
+let marksFavoriteThings = { color: 'green', flavor: 'umami' };
+let favoriteThings = [marksFavoriteThings];
+
+// rember `push` adds an item on to the end of an array
+favoriteThings.push({
+  name: 'eleanore',
+  color: 'blue',
+  flavor: 'sweet'
+});
+
+favoriteThings.push({
+  name: 'judd',
+  color: 'green',
+  flavor: 'salty'
+});
+
+console.log(favoriteThings);
+</script>
+
+---
+class: middle
+
+We can search and filter arrays using the `find` and `filter` methods
+
+---
+class: middle
+
+The `find` method is similar to a `forEach` where it will loop over all the elements
+and pass them into a function we provide.
+
+```js
+// find first person who likes sweet things:
+let sweetTooth = favoriteThings.find(function (person) {
+  return person.flavor == 'sweet';
+});
+console.log(sweetTooth);
+```
+But instead of doing something with each person, `find` expects the function to
+return `true` or `false`. The first instance that returns `true` will end the loop
+and return that element.
+
+So in the example above we can see that we're using the `==` comparator to find
+the first person who's favorite flavor is exactly equal to 'sweet'.
+
+If no elements match and `true` is never returend, then the value `undefined` will
+be assigned to `sweetTooth`
+
+
+<script type="text/javascript">
+let favoriteThings = [
+  {
+    name: 'mark',
+    color: 'green',
+    flavor: 'umami'
+  },
+  {
+    name: 'eleanore',
+    color: 'blue',
+    flavor: 'sweet'
+  },
+  {
+    name: 'judd',
+    color: 'green',
+    flavor: 'salty'
+  }
+];
+
+// find first person who likes sweet things:
+let sweetTooth = favoriteThings.find(function (person) {
+  return person.flavor == 'sweet';
+});
+console.log(sweetTooth);
+</script>
+
+---
+class: middle
+
+If we wanted to select all the people who like the same thing,
+we can use the `filter` method.
+
+Like `find`, `filter` will loop over an array we provide and pass it to a function.
+But instead of returning the first element that returns `true`, it'll collect
+them and return a new array.
+
+```js
+// find everyone who likes green:
+let greenFavs = favoriteThings.filter(function (person) {
+  return person.color == 'green';
+});
+console.log(greenFavs);
+```
+
+<script type="text/javascript">
+let favoriteThings = [
+  {
+    name: 'mark',
+    color: 'green',
+    flavor: 'umami'
+  },
+  {
+    name: 'eleanore',
+    color: 'blue',
+    flavor: 'sweet'
+  },
+  {
+    name: 'judd',
+    color: 'green',
+    flavor: 'salty'
+  }
+];
+
+// find first person who likes sweet things:
+let greenFavs = favoriteThings.filter(function (person) {
+  return person.color == 'green';
+});
+console.log(greenFavs);
+</script>
+
+---
+class: middle
+
+We can also use `filter` to create a simple search box for our collection of favorite things.
+
+```html
+<input id="textbox" type="text">
+<h5>Search Results:</h5>
+<ul id="search-results"></ul>
+```
+```js
+let textbox = document.querySelector('#textbox');
+let searchResults = document.querySelector('#search-results');
+textbox.addEventListener('keyup', function (event) {
+  let search = event.target.value;
+  // loop over array of favorite thing objects and
+  // return ones that match the search
+  let results = [];
+  if (search.length > 1) {
+    results = favoriteThings.filter(function (person) {
+      let colorMatches = person.color.includes(search);
+      let flavorMatches = person.flavor.includes(search);
+      return colorMatches || flavorMatches;
+    });
+  }
+  // empty the search results
+  searchResults.innerHTML = '';
+  results.forEach(function (result) {
+    searchResults.innerHTML += `<li>name: ${result.name}, color: ${result.color}, flavor: ${result.flavor}</li>`;
+  });
+});
+```
+---
+<input id="textbox-2" type="text">
+
+<h5>Search Results:</h5>
+<ul id="search-results"></ul>
+
+<script type="text/javascript">
+let favoriteThings = [
+  {
+    name: 'mark',
+    color: 'green',
+    flavor: 'umami'
+  },
+  {
+    name: 'eleanore',
+    color: 'blue',
+    flavor: 'sweet'
+  },
+  {
+    name: 'judd',
+    color: 'green',
+    flavor: 'salty'
+  }
+];
+let textbox = document.querySelector('#textbox-2');
+let searchResults = document.querySelector('#search-results');
+textbox.addEventListener('keypress', evt => evt.stopPropagation());
+textbox.addEventListener('keyup', function (event) {
+  let search = event.target.value;
+  // loop over array of favorite thing objects and
+  // return ones that match the search
+
+  let results = [];
+  if (search.length > 1) {
+    results = favoriteThings.filter(function (person) {
+      let colorMatches = person.color.includes(search);
+      let flavorMatches = person.flavor.includes(search);
+      return colorMatches || flavorMatches;
+    });
+  }
+
+  // empty the search results
+  searchResults.innerHTML = '';
+  results.forEach(function (result) {
+    searchResults.innerHTML += `<li>name: ${result.name}, color: ${result.color}, flavor: ${result.flavor}</li>`;
+  });
+});
+</script>
+
+---
+class: center middle
+
+## Using time in javascript
+
+---
+class: middle
+
+Javascript's [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+method offers many different approaches to using and representing time.
+
+The core of which centers around the `Date()` object:
+```js
+let today = new Date();
+console.log(today);
+```
+The `new` keyword is an important element to note.. that is required to create a new `Date` object
+and not just return the current date as a string.
+<script type="text/javascript">
+let today = new Date();
+console.log(today);
+</script>
+
+---
+class: middle
+
+From the result of `console.log(today)` we can see that the date is *localized* or customized to our individual system's time:
+#### Fri Apr 10 2020 11:13:30 GMT-0400 (Eastern Daylight Time)
+
+I am in New York (`EDT`) which has a [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
+offset of `-4 hours`.
+
+This is one of the useful aspects of Javascript's time utilities. We can handle dates both local to our users but also
+use GMT to orient them *(closer)* to a universal time.
+
+---
+class: middle
+
+More for later consideration, but would be remiss not to mention the [tyranny](https://www.theguardian.com/comment/story/0,,266761,00.html) of Greenwich Mean Time
+and the [history](https://networks.h-net.org/node/5293/reviews/5735/anuik-nanni-colonisation-time-ritual-routine-and-resistance-british) of imposition of western, christian time and calendars as a global standard
+that doesn't leave room for other ways of measuring and marking time... <span class="rotate-90">: )</span>
+
+
+---
+class: middle
+
+*Ahem* anyway:
+
+We can get the timezone offset directly by using the `getTimezoneOffset()` method:
+
+```js
+let today = new Date();
+let tz = today.getTimezoneOffset();
+console.log(tz);
+```
+`getTimezoneOffset()` returns the timezone offset in minutes and is the *offset* aka
+the difference required to reach GMT. So for timezones behind gmt, the offset will be positive,
+and those offsets ahead of GMT will be negative.
+
+```js
+console.log('We are', (tz/60), 'hours from GMT');
+```
+
+<script type="text/javascript">
+let today = new Date();
+let tz = today.getTimezoneOffset();
+console.log(tz);
+console.log('We are', (tz/60), 'hours from GMT');
+</script>
+
+---
+class: middle
+
+<!-- date formating / locale -->
+
+The `Date` object has formatting methods to convert the date into display text:
+```js
+let today = new Date();
+console.log(today.toDateString());
+console.log(today.toTimeString())
+```
+
+Javascript also has a method that uses regional conventions and adheres
+to any browser preferences that users might of set, with `toLocaleString()`, `toLocateDateString()`, and `toLocaleTimeString()`.
+```js
+// this will print in a regional date string, based on browser support
+console.log(today.toLocaleString());
+```
+<script type="text/javascript">
+  let today = new Date();
+  console.log(today.toDateString());
+  console.log(today.toTimeString())
+  console.log(today.toLocaleString());
+</script>
+
+---
+class: middle
+
+By default `toLocaleString()` will use the [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation) setting of the browser, but you can also specifiy which locale you would
+like to display the date as:
+```js
+// use Korean locale
+console.log(today.toLocaleString('ko-KR'));
+```
+<script type="text/javascript">
+  let today = new Date();
+  console.log(today.toLocaleString('ko-KR'));
+</script>
+
+
+---
+class: middle two-column
+
+<!-- constituent parts of date -->
+We can access the constituent parts of the date individually with the `get` methods:
+```js
+let today = new Date();
+// day of month
+console.log(today.getDate());
+// month of year
+console.log(today.getMonth());
+```
+there's an assortment of individual calls:
+<ul>
+  <li>getFullYear()</li>
+  <li>getMonth()</li>
+  <li>getDate()</li>
+  <li>getHours()</li>
+  <li>getMinutes()</li>
+  <li>getSeconds()</li>
+  <li>getMilliseconds()</li>
+</ul>
+
+<script type="text/javascript">
+let today = new Date();
+// day of month
+console.log(today.getDate());
+// month of year
+console.log(today.getMonth());
+</script>
+
+---
+class: middle
+
+Along with getting the current date with `new Date()`, we can also create a date object for a specified date.
+
+```js
+let newYear = new Date('1/1/2020');
+console.log('Happy new year!', newYear);
+```
+
+Javascript will make some assumptions with that, defaulting to the current timezone and if no time
+is specified midnight will be used.
+```js
+let newYearLunch = new Date('1/1/2020 12:00 pm GMT-5');
+console.log('Time for the first lunch of the new year', newYearLunch);
+```
+*Note* we used our timezone for this example, but `GMT-5` since January would be during daylight savings time (EDT) the offset is `-5`
+
+<script type="text/javascript">
+let newYear = new Date('1/1/2020');
+console.log('Happy new year!', newYear);
+let newYearLunch = new Date('1/1/2020 12:00 pm GMT-5');
+console.log('Time for the first lunch of the new year', newYearLunch);
+</script>
+
+---
+class: middle
+
+<!-- adding dates -->
+Creating set dates becomes really useful when we want to get the difference between two dates:
+
+```js
+let newYear = new Date('1/1/2020');
+let today = new Date();
+let diff = today - newYear;
+console.log("It's been", diff, 'milliseconds since the new year 😅');
+```
+The difference or `delta` between two dates is returned in milliseconds. So, to convert
+that into a more readable number:
+```js
+let newYear = new Date('1/1/2020');
+let today = new Date();
+let diff = today - newYear;
+let seconds = diff/1000;
+let minutes = seconds / 60;
+let hours = minutes / 60;
+let days = hours / 24;
+console.log(`It's been ${days} days, ${hours} hours, ${minutes} min, ${seconds} sec since HNY!`);
+```
+
+<script type="text/javascript">
+let newYear = new Date('1/1/2020');
+let today = new Date();
+let difference = today - newYear;
+console.log("It's been", difference, 'milliseconds since the new year 😅');
+let diff = today - newYear;
+let seconds = diff/1000; // milli -> sec
+let minutes = seconds / 60; // sec -> min
+let hours = minutes / 60; // min -> hr
+let days = hours / 24; // hr -> day
+console.log(`It's been ${days} days, ${hours} hours, ${minutes} min, ${seconds} sec since HNY!`);
+</script>
+
+---
+class: middle
+
+<!-- epoch and measuring seconds -->
+
+It can be really useful to measure the amount of time that has elapsed between things
+like events. The best way to do that in Javascript is with `epochs`.
+
+An `epoch` is a millisecond *timestamp* or point in time from a certain date. In programming
+a standardized `epoch` is the time since January 1, 1970 (must of been a good year <span class="rotate-90">: )</span>).
+
+We get these elapsed differences with `Date.now()`:
+```js
+let timestamp = Date.now();
+console.log(timestamp);
+```
+<script type="text/javascript">
+let timestamp = Date.now();
+console.log(timestamp);
+</script>
+
+---
+class: middle click-tracker-slide
+
+Not so interesting on it's own.. but if we used it with a click event to determine the last time we clicked:
+```js
+let timestamp = Date.now();
+
+document.body.addEventListener('click', function () {
+  // divide by 1000 to get as seconds
+  let diff = (Date.now() - timestamp)/1000;
+
+  console.log('You last clicked', diff, 'seconds ago');
+
+  // update our tracking timestamp
+  timestamp = Date.now();
+});
+```
+<script type="text/javascript">
+let timestamp = Date.now();
+document.querySelector('.click-tracker-slide').addEventListener('click', function () {
+  // divide by 1000 to get as seconds
+  let diff = (Date.now() - timestamp)/1000;
+  console.log('You last clicked', diff, 'seconds ago');
+  // upload our tracker timestamp
+  timestamp = Date.now();
+});
+</script>
+
+---
+class: middle
+
+## Using timers in javascript <span class="clock"></span>
+
+Javascript has a few useful ways to call code once or repeatedly after a specified delay.
+
+---
+class: middle
+
+The first useful timer is called `setTimeout()`. Set timeout takes a function to be called
+and a delay in milliseconds to wait to call it.
+
+```js
+function surprise() {
+  console.log('Surprise!!');
+}
+
+// wait 5000 millis or 5 seconds to call surprise
+setTimeout(surprise, 5000);
+```
+As with using event listeners, we want to pass the name of the function without the `()`
+parenthesis since that would result in immediately calling it...
+
+<script type="text/javascript">
+function surprise() {
+  console.log('Surprise!!');
+}
+
+// wait 5000 millis or 5 seconds to call surprise
+setTimeout(surprise, 5000);
+</script>
+
+---
+class: middle needy-website-slide
+
+The `setTimeout()` method returns a special variable that you can use to also clear the timer
+from going off with `clearTimeout()`:
+```js
+// our empty timer tracking variable
+let timer;
+
+function complain() {
+  console.log("*website voice* ugh you haven't clicked me in over 5 sec!!");
+  timer = setTimeout(complain, 5000);
+}
+
+document.body.addEventListener('click', function () {
+  console.log('*website voice* eee tyyy');
+  clearTimeout(timer);
+  timer = setTimeout(complain, 5000);
+});
+
+
+// start if off
+timer = setTimeout(complain, 5000);
+```
+
+<script type="text/javascript">
+let timer;
+
+function complain() {
+  console.log("*website voice* ugh you haven't clicked me in over 5 sec!!");
+  if (document.querySelector('.needy-website-slide.remark-visible')) {
+    timer = setTimeout(complain, 5000);
+  }
+}
+
+document.querySelector('.needy-website-slide').addEventListener('click', function () {
+  console.log('*website voice* eee tyyy');
+  clearTimeout(timer);
+  timer = setTimeout(complain, 5000);
+});
+
+timer = setTimeout(complain, 5000);
+</script>
+
+---
+class: middle
+
+Along with setting timeouts, javascript has a method to repeatedly call a function
+at after a consistent delay. `setInterval()` like `setTimeout()` takes a function
+name and a delay.
+
+```js
+function clockTick() {
+  console.log('tick');
+}
+
+// tick the clock every second
+setInterval(clockTick, 1000);
+```
+
+`setInterval()` works just like `setTimeout()` except it repeatedly calls the function after
+a delay. The same clearing principles apply, with `clearInterval()` taking the variable
+returned by `setInterval()`.
+
+<script type="text/javascript">
+setInterval(function () {
+  console.log('tick');
+}, 1000);
+</script>
+
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      // run any script tags contained within the active slide
+      slideshow.on('afterShowSlide', (slide) => {
+        var scripts = document.querySelector('.remark-visible').querySelectorAll('script');
+        if (scripts.length > 0) {
+          console.clear();
+        }
+        for (var script of scripts) {
+          setTimeout(() => {
+            eval(script.innerText);
+          }, 100);
+        }
+      });
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname) {
+             links[i].target = '_blank';
+         }
+      }
+    </script>
+  </body>
+</html>
