@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to JS</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Nanum+Gothic);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      html {
+        font-size: 24px;
+      }
+
+      body { font-family: 'Open Sans';}
+      h1, h2, h3 {
+        font-family: 'Nanum Gothic';
+        font-weight: normal;
+      }
+      .remark-container {
+        background: rgb(237, 238, 229);
+      }
+      .remark-slide-scaler {
+        box-shadow: 0 0 10px #88888857;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .hljs-default .hljs-name { color: #5fa04b; }
+      .hljs-default .hljs-string, .hljs-default .hljs-selector-id, .hljs-default .hljs-selector-class {
+        color: rgb(198, 122, 22);
+      }
+      .hljs-default .hljs-selector-pseudo {
+        color: rgb(30, 115, 203);
+      }
+      .remark-inline-code {
+        background: #F0F0F0;
+        color: #5fa04b;
+        padding: 0 3px;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 2%;
+        font-size: 12px;
+        left: 2%;
+        font-style: italic;
+        color: rgb(108, 108, 108);
+      }
+
+      .two-column ul {
+        columns: 2;
+      }
+      .three-column ul {
+        columns: 3;
+      }
+      .li-spacing li {
+        margin-bottom: 35px;
+      }
+
+      a { text-decoration: none; }
+      a:visited { color: blue;}
+
+      /* for slide examples */
+
+      .fix-again-ugh .remark-code-line:nth-child(2),
+      .fix-multiline .remark-code-line:nth-child(3),
+      .fix-multiline .remark-code-line:nth-child(4) {
+        color: #888888;
+      }
+
+      .tree-img img {
+        display: block;
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      #more {
+        word-break: break-all;
+      }
+
+      .rotate-90 {
+        display: inline-block;
+        margin-left: 10px;
+        transform: rotateZ(90deg);
+      }
+
+      .red {
+        color: red;
+      }
+
+      .completed {
+        text-decoration: line-through;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: middle
+
+## a quick demo how to make bookmarklets
+`bookmarklets` like the the one I made for Exercise C are a quick way to package javascript
+for use on other pages.
+
+They work by placing your javascript code in the href of a link tag with the special `javascript:` preface.
+This is like `mailto:` or `tel:` prefaces for links. They signal to the browser to do something special with the link.
+
+The `javascript:` preface tells the browser to execute the text of the link as javascript.
+
+---
+class: middle
+
+Then, we wrap our javascript within the link
+```js
+document.body.style.transition = 'color 3s ease-in-out';
+document.body.style.color = 'green';
+```
+
+To wrap our javascript, put it all on one line within an anonymous function in parentheses and add the `()` at the end.
+```js
+(function (){ document.body.style.transition = 'color 3s ease-in-out'; document.body.style.color = 'green'; })()
+```
+Normally this would execute the function right away. But since it's being placed in a link after the `javascript:`
+directive, it'll execute on click:
+```html
+<a href="javascript:(function (){ document.body.style.color = 'green'; })()">Spring has sprung</a>
+```
+<a href="javascript:(function (){ document.body.style.transition = 'color 3s ease-in-out'; document.body.style.color = 'green'; })()">Spring has sprung</a>
+
+
+
+    </textarea>
+    <script src="../remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create({ ratio: '4:3', navigation: { scroll: false }});
+
+      // run any script tags contained within the active slide
+      slideshow.on('afterShowSlide', (slide) => {
+        var scripts = document.querySelector('.remark-visible').querySelectorAll('script');
+        if (scripts.length > 0) {
+          console.clear();
+        }
+        for (var script of scripts) {
+          setTimeout(() => {
+            eval(script.innerText);
+          }, 100);
+        }
+      });
+
+      var links = document.links;
+
+      for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+         if (links[i].hostname != window.location.hostname && !links[i].href.startsWith('javascript')) {
+             links[i].target = '_blank';
+         }
+      }
+    </script>
+  </body>
+</html>
