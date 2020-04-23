@@ -12,6 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 #glass {
@@ -26,6 +27,7 @@ body {
   border-left: solid 1px #CCC;
   border-right: solid 1px #CCC;
   z-index: 20;
+  opacity: .8;
 }
 
 .top {
