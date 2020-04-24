@@ -100,6 +100,7 @@ a:hover pre {
   top: 1rem;
   width: 35rem;
   height: 10rem;
+  z-index: 50;
 }
 #msg.hidden {
   display: none;
