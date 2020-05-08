@@ -68,7 +68,6 @@ const creatureIcons = {
   bug: '🐛',
   snail: '🐌',
 };
-const creatures = Object.keys(creatureIcons);
 const creatureEvent = {
   cricket: '🌼',
   bee: '🌺',
@@ -80,6 +79,7 @@ const creatureEvent = {
   snail: '💧',
   turtle: '💧'
 };
+const creatures = Object.keys(creatureIcons);
 let nickname = '';
 
 let creature = creatures[Math.round(Math.random() * (creatures.length-1))];
