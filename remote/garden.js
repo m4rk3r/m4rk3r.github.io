@@ -42,7 +42,7 @@ preTags.forEach(function (tag) {
 
 
 // telepresent creatures : )
-// var socket = io('http://localhost:3500');
+//var socket = io('http://localhost:3500');
 var socket = io('https://class.duskjacket.com', {
     path: '/ws',
     transports: ['websocket']
@@ -50,23 +50,35 @@ var socket = io('https://class.duskjacket.com', {
 
 const uid = Math.random().toString(36).substr(2, 9);
 let posX = 0,
-    posY = 0;
+    posY = 0,
+    evtIdx = 0;
 
 let offsetX = 15 / window.innerWidth * 100;
 let offsetY = 15 / window.innerHeight * 100;
 
 const creatureExpiry = {};
-const creatures = ['cricket', 'bee', 'butterfly', 'ant', 'duck', 'lizard', 'ladybug', 'bug', 'snail'];
 const creatureIcons = {
   cricket: '🦗',
   bee: '🐝',
   butterfly: '🦋',
   ant: '🐜',
   duck: '🦆',
-  lizard: '🦎',
+  turtle: '🐢',
   ladybug: '🐞',
   bug: '🐛',
-  snail: '🐌'
+  snail: '🐌',
+};
+const creatures = Object.keys(creatureIcons);
+const creatureEvent = {
+  cricket: '🌼',
+  bee: '🌺',
+  butterfly: '🌸',
+  ant: '💮',
+  duck: '💧',
+  ladybug: '🏵',
+  bug: '🕳',
+  snail: '💧',
+  turtle: '💧'
 };
 let nickname = '';
 
@@ -74,14 +86,39 @@ let creature = creatures[Math.round(Math.random() * (creatures.length-1))];
 const creatureSelect = document.querySelector('#creature-select');
 creatures.forEach(c => creatureSelect.innerHTML += `<option value="${c}" ${ creature === c ? 'selected="true"' : ''}>${creatureIcons[c]} ${c}</option>`);
 
+creatureSelect.addEventListener('click', (evt) => evt.stopPropagation());
 creatureSelect.addEventListener('change', (evt) => {
   creature = evt.target.value;
 });
 
+let mouseDown = false;
+let lastEvt = 0;
 document.addEventListener('mousemove', (evt) => {
   posX = evt.clientX / window.innerWidth * 100;
   posY = evt.clientY / window.innerHeight * 100;
+
+  if (mouseDown && socket && Date.now() - lastEvt > 150) {
+    lastEvt = Date.now();
+    socket.emit('clickEvt', { id: uid, creature: creature, evtIdx: evtIdx++, position: { x: posX, y: posY } })
+  }
 });
+
+const mouseAction = (evt) => {
+  let pX = evt.clientX / window.innerWidth * 100;
+  let pY = evt.clientY / window.innerHeight * 100;
+
+  if (socket) {
+    socket.emit('clickEvt', { id: uid, creature: creature, evtIdx: evtIdx++, position: { x: pX, y: pY } })
+  }
+}
+document.addEventListener('click', mouseAction);
+document.addEventListener('mousedown', (evt) => {
+  mouseDown = true;
+});
+document.addEventListener('mouseup', (evt) => {
+  mouseDown = false;
+});
+
 
 document.querySelector('#nickname').addEventListener('input', evt => {
   nickname = evt.target.value;
@@ -90,7 +127,7 @@ document.querySelector('#nickname').addEventListener('input', evt => {
 
 const fadeCreature = (id) => {
   console.log('fading', id);
-  const creature = document.querySelector(`#creature-${id}`);
+  const creature = document.querySelector(id);
   creature.classList.add('fade');
   creature.addEventListener('transitionend', () => {
     document.body.removeChild(creature);
@@ -100,7 +137,6 @@ const fadeCreature = (id) => {
 
 const drawCreatures = creatures => {
   if (!creatures || typeof creatures !== "object") {
-    console.log(creatures)
     return;
   }
 
@@ -127,7 +163,7 @@ const drawCreatures = creatures => {
         if (creatureExpiry[creature.id]) {
           clearTimeout(creatureExpiry[creature.id])
         }
-        creatureExpiry[creature.id] = setTimeout(() => fadeCreature(creature.id), 1000);
+        creatureExpiry[creature.id] = setTimeout(() => fadeCreature(`#creature-${creature.id}`), 1000);
       }
 
     } else {
@@ -147,10 +183,20 @@ const drawCreatures = creatures => {
       // add fade timeouts for other bugs
       if (creature.id !== uid) {
         clearTimeout(creatureExpiry[creature.id]);
-        creatureExpiry[creature.id] = setTimeout(() => fadeCreature(creature.id), 1000);
+        creatureExpiry[creature.id] = setTimeout(() => fadeCreature(`#creature-${creature.id}`), 1000);
       }
     }
   });
+}
+
+const createEvent = data => {
+  let e = document.createElement('div');
+  e.id = `event-${data.id}-${data.evtIdx}`;
+  e.className = 'event';
+  e.style.left = `${data.position.x}%`;
+  e.style.top = `${data.position.y}%`;
+  e.innerHTML = creatureEvent[data.creature];
+  document.body.appendChild(e);
 }
 
 socket.on('connect', () => {
@@ -167,6 +213,18 @@ socket.on('connect', () => {
 });
 
 socket.on('pong', drawCreatures);
+
+socket.on('activity', data => {
+  if (Array.isArray(data)) {
+    data.forEach((d) => {
+      createEvent(d);
+      setTimeout(() => fadeCreature(`#event-${d.id}-${d.evtIdx}`), (d.lifespan * 1000) - (d.ts - d.created));
+    });
+  } else {
+    createEvent(data);
+    setTimeout(() => fadeCreature(`#event-${data.id}-${data.evtIdx}`), data.lifespan * 1000);
+  }
+});
 
 document.addEventListener('keyup', (evt) => {
   if (evt.key === 'm' && evt.target.tagName !== "TEXTAREA") {

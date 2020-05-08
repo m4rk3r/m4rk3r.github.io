@@ -11,6 +11,10 @@ body {
   cursor: none;
 }
 
+* {
+  user-select: none;
+}
+
 pre {
   position: absolute;
   color: white;
@@ -53,6 +57,11 @@ a:hover pre {
   border: none;
 }
 
+.event {
+  position: absolute;
+  z-index: 40;
+  transition: opacity 2s ease-in-out;
+}
 .creature {
   position: absolute;
   z-index: 50;
@@ -76,7 +85,7 @@ a:hover pre {
   transform: rotateZ(-90deg);
 }
 
-.creature.fade {
+.event.fade, .creature.fade {
   opacity: 0;
 }
 
@@ -87,12 +96,10 @@ a:hover pre {
   width: 11rem;
   display: flex;
   flex-direction: column;
+  z-index: 45;
 }
 #nickname {
   margin-bottom: .5rem;
-}
-#creature-select {
-
 }
 #msg {
   position: fixed;
