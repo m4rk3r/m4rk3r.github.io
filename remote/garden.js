@@ -91,6 +91,13 @@ creatureSelect.addEventListener('change', (evt) => {
   creature = evt.target.value;
 });
 
+const sendMouseAction = () => {
+  const data = { id: uid, creature: creature, evtIdx: evtIdx++, position: { x: posX, y: posY } }
+  socket.emit('clickEvt', data);
+  createEvent(data);
+  setTimeout(() => fadeCreature(`#event-${data.id}-${data.evtIdx}`), (2 * 60) * 1000);
+}
+
 let mouseDown = false;
 let lastEvt = 0;
 document.addEventListener('mousemove', (evt) => {
@@ -99,19 +106,15 @@ document.addEventListener('mousemove', (evt) => {
 
   if (mouseDown && socket && Date.now() - lastEvt > 150) {
     lastEvt = Date.now();
-    socket.emit('clickEvt', { id: uid, creature: creature, evtIdx: evtIdx++, position: { x: posX, y: posY } })
+    sendMouseAction();
   }
 });
 
-const mouseAction = (evt) => {
-  let pX = evt.clientX / window.innerWidth * 100;
-  let pY = evt.clientY / window.innerHeight * 100;
-
+document.addEventListener('click', (evt) => {
   if (socket) {
-    socket.emit('clickEvt', { id: uid, creature: creature, evtIdx: evtIdx++, position: { x: pX, y: pY } })
+    sendMouseAction();
   }
-}
-document.addEventListener('click', mouseAction);
+});
 document.addEventListener('mousedown', (evt) => {
   mouseDown = true;
 });
