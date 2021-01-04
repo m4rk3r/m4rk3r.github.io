@@ -92,7 +92,7 @@ creatureSelect.addEventListener('change', (evt) => {
 });
 
 const sendMouseAction = () => {
-  const data = { id: uid, creature: creature, evtIdx: evtIdx++, position: { x: posX, y: posY } }
+  const data = { id: uid, creature: creature, evtIdx: evtIdx++, x: posX, y: posY }
   socket.emit('clickEvt', data);
   createEvent(data);
   setTimeout(() => fadeCreature(`#event-${data.id}-${data.evtIdx}`), (2 * 60) * 1000);
@@ -196,8 +196,8 @@ const createEvent = data => {
   let e = document.createElement('div');
   e.id = `event-${data.id}-${data.evtIdx}`;
   e.className = 'event';
-  e.style.left = `${data.position.x}%`;
-  e.style.top = `${data.position.y}%`;
+  e.style.left = `${data.x}%`;
+  e.style.top = `${data.y}%`;
   e.innerHTML = creatureEvent[data.creature];
   document.body.appendChild(e);
 }
@@ -207,7 +207,7 @@ socket.on('connect', () => {
   let ts = Date.now();
   const tick = () => {
     if (Date.now() - ts > 16) {
-      socket.emit('frame', { id: uid, nickname: nickname, creature: creature, position: { x: posX, y: posY } });
+      socket.emit('frame', { id: uid, nickname: nickname, creature: creature, x: posX, y: posY });
       ts = Date.now();
     }
     requestAnimationFrame(tick);
