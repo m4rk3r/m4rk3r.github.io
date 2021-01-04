@@ -42,7 +42,7 @@ preTags.forEach(function (tag) {
 
 
 // telepresent creatures : )
-//var socket = io('http://localhost:3500');
+//var socket = io('http://localhost:3500', { transports: ['websocket']});
 var socket = io('https://class.duskjacket.com', {
     path: '/ws',
     transports: ['websocket']
@@ -153,8 +153,8 @@ const drawCreatures = creatures => {
       newCreature.id = `creature-${creature.id}`;
       newCreature.title = creature.nickname;
       newCreature.className = `creature ${creature.creature} ${ uid === creature.id ? 'self' : ''}`;
-      newCreature.style.left = `${creature.position.x - offsetX}%`;
-      newCreature.style.top = `${creature.position.y - offsetY}%`;
+      newCreature.style.left = `${creature.x - offsetX}%`;
+      newCreature.style.top = `${creature.y - offsetY}%`;
       document.body.append(newCreature);
 
       const bcr = newCreature.getBoundingClientRect();
@@ -171,8 +171,8 @@ const drawCreatures = creatures => {
 
     } else {
       const c = document.querySelector(`#creature-${creature.id}`);
-      c.style.left = `${creature.position.x - offsetX}%`;
-      c.style.top = `${creature.position.y - offsetY}%`;
+      c.style.left = `${creature.x - offsetX}%`;
+      c.style.top = `${creature.y - offsetY}%`;
 
       if (creature.nickname !== c.title) {
         c.title = creature.nickname;
